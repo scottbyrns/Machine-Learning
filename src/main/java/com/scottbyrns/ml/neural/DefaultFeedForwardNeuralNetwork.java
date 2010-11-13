@@ -1,7 +1,7 @@
 package com.scottbyrns.ml.neural;
 
 import com.scottbyrns.ml.Mathematics;
-import com.scottbyrns.ml.datasets.*;
+import com.scottbyrns.ml.datasets.Pattern;
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionLinear;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
@@ -9,11 +9,7 @@ import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
 import java.util.Vector;
 
 /**
- * What happens when input is subtracted back out, can previous input be recalled?
- * Is this a mechanism by which mid term memory can be accessed?
- */
-
-/**
+ * Default implementation of the FeedForwardNeuralNetwork interface.
  * Created by scott
  * Date: Nov 11, 2010
  * Time: 2:10:48 PM
@@ -23,9 +19,12 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     public static final int DEFAULT_NUMBER_BIAS_NEURONS = 1;
 
     private Vector<NeuronLayer> neuronLayers;
-
     private Vector<SynapseLayer> synapseLayers;
 
+    /**
+     * Create an instance of a DefaultFeedForwardNeuralNetwork from an existing FeedForwardNeuralNetwork
+     * @param feedForwardNeuralNetwork
+     */
     public DefaultFeedForwardNeuralNetwork(FeedForwardNeuralNetwork feedForwardNeuralNetwork) {
         /* Sorry for the formatting, this method call was way too long visually otherwise */
         this(
@@ -35,10 +34,23 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
         );
     }
 
+    /**
+     * Create a new DefaultFeedForwardNeuralNetwork
+     * @param inputSize number of inputs
+     * @param hiddenSizes array of hidden layer neuron counts
+     * @param outputSize number of outputs
+     */
     public DefaultFeedForwardNeuralNetwork(int inputSize, int[] hiddenSizes, int outputSize) {
         this(inputSize, hiddenSizes, outputSize, new ActivationFunctionSigmoid());
     }
 
+    /**
+     * Create a new DefaultFeedForwardNeuralNetwork
+     * @param inputSize number of inputs
+     * @param hiddenSizes array of hidden layer neuron counts
+     * @param outputSize number of outputs
+     * @param activationFunction neuron activation function.
+     */
     public DefaultFeedForwardNeuralNetwork(int inputSize, int[] hiddenSizes, int outputSize, ActivationFunction activationFunction) {
         try {
 			// Create the layers
@@ -315,10 +327,8 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	/**
 	 * Connects neurons from one layer to the next
 	 *
-	 * @param source
-	 *            Source layer
-	 * @param destination
-	 *            Destination layer
+	 * @param source Source layer
+	 * @param destination Destination layer
 	 * @return Boolean indicating if the operation was successful
 	 */
 	private boolean connectLayers(int source, int destination) {
@@ -379,19 +389,34 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
         }
     }
 
+    /**
+     * Get the neuron layer vector.
+     * @return neuron layer vector
+     */
     public Vector<NeuronLayer> getNeuronLayers() {
         return neuronLayers;
     }
 
-
+    /**
+     * Set the neuron layer vector to the provided input.
+     * @param neuronLayers
+     */
     private void setNeuronLayers(Vector<NeuronLayer> neuronLayers) {
         this.neuronLayers = neuronLayers;
     }
 
+    /**
+     * Get the synapse layer vector.
+     * @return synapse layer vector
+     */
     public Vector<SynapseLayer> getSynapseLayers() {
         return synapseLayers;
     }
 
+    /**
+     * Set the synapse layer vector to the provided input.
+     * @param synapseLayers
+     */
     private void setSynapseLayers(Vector<SynapseLayer> synapseLayers) {
         this.synapseLayers = synapseLayers;
     }

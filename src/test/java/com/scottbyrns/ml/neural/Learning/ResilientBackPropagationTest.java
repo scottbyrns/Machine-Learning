@@ -2,14 +2,11 @@ package com.scottbyrns.ml.neural.Learning;
 
 import com.scottbyrns.ml.datasets.DefaultPattern;
 import com.scottbyrns.ml.datasets.DefaultPatternSet;
-import com.scottbyrns.ml.datasets.Pattern;
 import com.scottbyrns.ml.datasets.PatternSet;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
 import com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Vector;
 
 /**
  * Created by scott
