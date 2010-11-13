@@ -142,4 +142,10 @@ public interface FeedForwardNeuralNetwork {
      * @return Iterator
      */
     public Iterator<NeuronLayer> getNeuronLayersIterator ();
+
+    /**
+     * Get an iterator for the synapse layers vector.
+     * @return Iterator
+     */
+    public Iterator<SynapseLayer> getSynapseLayersIterator ();
 }

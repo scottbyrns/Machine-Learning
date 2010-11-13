@@ -109,10 +109,14 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 	 */
 	protected boolean resetPartialDerivatives() {
         try {
-            for (SynapseLayer layer : getNetwork().getSynapseLayers()) {
-                Synapse synapse;
-                for (int i = 0; i < layer.size(); i += 1) {
-                    synapse = layer.getSynapseAtIndex(i);
+            Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
+            Iterator<Synapse> synapseIterator;
+            Synapse synapse;
+
+            while (synapseLayerIterator.hasNext()) {
+                synapseIterator = synapseLayerIterator.next().getSynapsesIterator();
+                while (synapseIterator.hasNext()) {
+                    synapse = synapseIterator.next();
                     getErrorPartialDerivative().put(synapse, 0.0);
                     getOldErrorPartialDerivative().put(synapse, 0.0);
                     getDeltaWeight().put(synapse, 0.1);

@@ -423,6 +423,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
     /**
+     * Get an iterator for the synapse layers vector.
+     * @return Iterator
+     */
+    public Iterator<SynapseLayer> getSynapseLayersIterator () {
+        return getSynapseLayers().iterator();
+    }
+
+    /**
      * Set the synapse layer vector to the provided input.
      * @param synapseLayers
      */
