@@ -6,6 +6,7 @@ import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionLinear;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -403,6 +404,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      */
     private void setNeuronLayers(Vector<NeuronLayer> neuronLayers) {
         this.neuronLayers = neuronLayers;
+    }
+
+    /**
+     * Get an iterator for the neuron layers vector.
+     * @return Iterator
+     */
+    public Iterator<NeuronLayer> getNeuronLayersIterator () {
+        return getNeuronLayers().iterator();
     }
 
     /**

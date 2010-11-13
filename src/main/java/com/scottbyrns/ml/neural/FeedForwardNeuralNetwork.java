@@ -1,7 +1,9 @@
 package com.scottbyrns.ml.neural;
 
+import com.scottbyrns.ml.datasets.Pattern;
+
+import java.util.Iterator;
 import java.util.Vector;
-import com.scottbyrns.ml.datasets.*;
 
 /**
  * Created by scott
@@ -135,4 +137,9 @@ public interface FeedForwardNeuralNetwork {
 	 */
 	public Vector<Double> getPrediction(Vector<Double> input);
 
+    /**
+     * Get an iterator for the neuron layers vector.
+     * @return Iterator
+     */
+    public Iterator<NeuronLayer> getNeuronLayersIterator ();
 }

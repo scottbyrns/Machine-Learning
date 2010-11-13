@@ -76,15 +76,21 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         setMinimumValidationError(Double.MAX_VALUE);
         setMinimumValidationErrorWeights(null);
 
+        Iterator<NeuronLayer> neuronLayerIterator = getNetwork().getNeuronLayersIterator();
+        NeuronLayer neuronLayer;
+        Neuron neuron;
+        Synapse synapse;
+        Iterator<Neuron> neuronIterator;
+        Iterator<Synapse> synapseIterator;
 
-        for (NeuronLayer layer : getNetwork().getNeuronLayers()) {
-            Neuron neuron;
-            Synapse synapse;
-            for (int i = 0; i < layer.getNetworkSize(); i += 1) {
-                neuron = layer.getNeuron(i);
-                Iterator<Synapse> neuronIterator = neuron.getOutgoingSynapseIterator();
-                while (neuronIterator.hasNext()) {
-                    synapse = neuronIterator.next();
+        while (neuronLayerIterator.hasNext()) {
+            neuronLayer = neuronLayerIterator.next();
+            neuronIterator = neuronLayer.getNeuronsIterator();
+            while (neuronIterator.hasNext()) {
+                neuron = neuronIterator.next();
+                synapseIterator = neuron.getOutgoingSynapseIterator();
+                while (synapseIterator.hasNext()) {
+                    synapse = synapseIterator.next();
                     getWeightUpdate().put(synapse, 0D);
                     getOldErrorPartialDerivative().put(synapse, 0D);
                     getErrorPartialDerivative().put(synapse, 0D);
