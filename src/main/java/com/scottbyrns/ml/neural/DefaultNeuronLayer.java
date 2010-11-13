@@ -230,15 +230,27 @@ public class DefaultNeuronLayer implements NeuronLayer {
         }
     }
 
+    /**
+     * Get the neuron vector of this layer
+     * @return neuron vector
+     */
     private Vector<Neuron> getNeurons () {
         return neurons;
     }
 
+    /**
+     * Set the neurons vector to the provided input
+     * @param neurons new neuron vector
+     */
     private void setNeurons (Vector<Neuron> neurons) {
         this.neurons = neurons;
     }
 
-    private Iterator<Neuron> getNeuronsIterator () {
+    /**
+     * Get an iterator for the neuron vector.
+     * @return Iterator
+     */
+    public Iterator<Neuron> getNeuronsIterator () {
         return getNeurons().iterator();
     }
 }

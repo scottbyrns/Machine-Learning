@@ -2,6 +2,7 @@ package com.scottbyrns.ml.neural;
 
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -73,4 +74,10 @@ public interface NeuronLayer {
      * @return Boolean indication of operations success.
      */
     public boolean setActivationFunction (ActivationFunction activationFunction);
+
+    /**
+     * Get an iterator for the neuron vector.
+     * @return Iterator
+     */
+    public Iterator<Neuron> getNeuronsIterator ();
 }

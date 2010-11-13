@@ -306,7 +306,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
             NeuronLayer input_layer = getNeuronLayers().get(0);
             int number_of_bias_nodes = input_layer.getNumberOfNeuronsOfType(NeuronType.Bias);
             /**
-             * @TODO FIX
+             * @TODO FIX warning
              */
             Vector<Double> padded_input = (Vector<Double>) input.clone();
             for (int i = 0; i < number_of_bias_nodes; i++) {

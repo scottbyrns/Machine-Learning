@@ -1,7 +1,6 @@
 package com.scottbyrns.ml.neural;
 
-import com.scottbyrns.ml.neural.Synapse;
-
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -35,5 +34,11 @@ public interface SynapseLayer {
      * @return Vector of weight values, null in case of error.
      */
     public Vector<Double> getWeightVector();
+
+    /**
+     * Get an iterator for the synapse vector.
+     * @return
+     */
+    public Iterator<Synapse> getSynapsesIterator ();
 
 }
