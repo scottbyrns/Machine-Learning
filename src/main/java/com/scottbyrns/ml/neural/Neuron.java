@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 /**
+ * Object representation of a Neuron
  * Created by scott
  * Date: Nov 10, 2010
  * Time: 5:33:08 PM
@@ -93,7 +94,7 @@ public interface Neuron extends Serializable {
     public Iterator<Synapse> getIncomingSynapseIterator();
 
     /**
-     * Remove an incoming synapse.
+     * Remove a synapse from the incoming synapse vector.
      *
      * @param synapse to remove
      */
