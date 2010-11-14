@@ -105,7 +105,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 	/**
 	 * Resets the partial derivative field of all synapses.
 	 *
-	 * @return Boolean indicating if the operation was successfull
+	 * @return Boolean indicating if the operation was successful
 	 */
 	protected boolean resetPartialDerivatives() {
         try {
@@ -159,16 +159,20 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 	public void run()
 	{
         setRunning(true);
-			if (getLearningStrategy() == LearningStrategy.Memorize)
-				memorize(getPatternSet().getShrunkPatterns(PatternType.All));
-			else if (getLearningStrategy() == LearningStrategy.Generalization)
-				generalize(getPatternSet().getShrunkPatterns(PatternType.Training), getPatternSet().getShrunkPatterns(PatternType.Validation));
+
+        if (getLearningStrategy() == LearningStrategy.Memorize) {
+            memorize(getPatternSet().getShrunkPatterns(PatternType.All));
+        }
+        else if (getLearningStrategy() == LearningStrategy.Generalization) {
+            generalize(getPatternSet().getShrunkPatterns(PatternType.Training), getPatternSet().getShrunkPatterns(PatternType.Validation));
+        }
+
         setRunning(false);
 	}
 
 	/**
 	 * Trains the network to generalize by the "Early Stopping Method of
-	 * Training"
+	 * Training
 	 *
 	 * @param trainingPatterns Training set
 	 * @param validationPatterns Validation set
@@ -254,10 +258,10 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         try {
             calculateOutputLayerDeltas(output);
 
-            Vector<NeuronLayer> hiddenLayers = getNetwork().getHiddenLayers();
+            Iterator<NeuronLayer> hiddenLayersIterator = getNetwork().getHiddenNeuronLayersIterator();
 
-            for (int i = 0; i < hiddenLayers.size(); i += 1) {
-                calculateHiddenLayerDeltas(hiddenLayers.get(i));
+            while (hiddenLayersIterator.hasNext()) {
+                calculateHiddenLayerDeltas(hiddenLayersIterator.next());
             }
 
             return true;
@@ -287,8 +291,12 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 	 */
     private boolean calculateHiddenLayerDeltas(NeuronLayer layer) {
         try {
-            for (int i = 0; i < layer.getNetworkSize(); i += 1) {
-                layer.getNeuron(i).setDelta(calculateHiddenNeuronDelta(layer.getNeuron(i)));
+            Iterator<Neuron> neuronIterator = layer.getNeuronsIterator();
+            Neuron neuron;
+
+            while (neuronIterator.hasNext()) {
+                neuron = neuronIterator.next();
+                neuron.setDelta(calculateHiddenNeuronDelta(neuron));
             }
 
             return true;
@@ -326,11 +334,14 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     private boolean calculateOutputLayerDeltas(Vector<Double> output) {
         try {
             NeuronLayer outputLayer = getNetwork().getOutputNeurons();
+
+            Iterator<Neuron> outputLayerIterator = getNetwork().getOutputNeuronLayerIterator();
+            Iterator<Double> outputDoubleIterator = output.iterator();
             Neuron neuron;
 
-            for (int i = 0; i < outputLayer.getNetworkSize(); i += 1) {
-                neuron = outputLayer.getNeuron(i);
-                neuron.setDelta(calculateOutputNeuronDelta(output.get(i), neuron));
+            while (outputLayerIterator.hasNext() && outputDoubleIterator.hasNext()) {
+                neuron = outputLayerIterator.next();
+                neuron.setDelta(calculateOutputNeuronDelta(outputDoubleIterator.next(), neuron));
             }
 
             return true;

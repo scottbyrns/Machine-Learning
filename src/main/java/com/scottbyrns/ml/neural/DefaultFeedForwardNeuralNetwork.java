@@ -369,6 +369,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
     /**
+     * Get an iterator for the output neuron layer vector.
+     * @return Iterator
+     */
+    public Iterator<Neuron> getOutputNeuronLayerIterator () {
+        return getOutputNeurons().getNeuronsIterator();
+    }
+
+    /**
      * Get a vector of hidden neuron layers
      * @return
      */
@@ -379,6 +387,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
         }
 
         return hiddenLayers;
+    }
+
+    /**
+     * Get an iterator for the hidden neuron layers vector.
+     * @return Iterator
+     */
+    public Iterator<NeuronLayer> getHiddenNeuronLayersIterator () {
+        return getHiddenLayers().iterator();
     }
 
     /**
