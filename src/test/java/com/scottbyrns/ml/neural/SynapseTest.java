@@ -2,10 +2,11 @@ package com.scottbyrns.ml.neural;
 
 import com.scottbyrns.ml.Mathematics;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionConstant;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by scott
@@ -98,5 +99,13 @@ public class SynapseTest {
     public void testSetValue () {
         synapse.setValue(0.123);
         assertEquals(0.123, synapse.getValue(), 0.001);
+    }
+
+    @After
+    public void teardown () {
+        testNeuronDestination = null;
+        testNeuronSource = null;
+
+        synapse = null;
     }
 }
