@@ -14,15 +14,6 @@ import java.util.Vector;
 public interface NeuronLayer {
 
     /**
-     * Get the size of the neuron network in this layer.
-     *
-     * @return size of the neuron network in this layer.
-     * @TODO see if switching to iterators will render this method obsolete.
-     * if so remove it from the public api.
-     */
-    public int getNetworkSize ();
-
-    /**
      * Calculate the neurons output by passing inputs by the activation function.
      *
      * @return Boolean indication of operations success.

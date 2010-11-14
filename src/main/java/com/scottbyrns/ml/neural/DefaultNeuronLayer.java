@@ -39,14 +39,6 @@ public class DefaultNeuronLayer implements NeuronLayer {
     }
 
     /**
-     * Get the size of this layers network of neurons.
-     * @return
-     */
-    public int getNetworkSize () {
-        return getNeurons().size();
-    }
-
-    /**
      * Calculate the neurons output by passing inputs by the activation function.
      * @return Boolean indication of operations success.
      */

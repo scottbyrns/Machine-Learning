@@ -11,7 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Created by scott
@@ -30,7 +31,17 @@ public class NeuronLayerTest {
     @Test
     public void testOverloadedConstructor () {
         neuralLayer = new DefaultNeuronLayer(5, new ActivationFunctionLinear());
-        assertEquals(5, neuralLayer.getNetworkSize());
+
+        int count = 0;
+
+        Iterator<Neuron> neuronIterator = neuralLayer.getNeuronsIterator();
+
+        while (neuronIterator.hasNext()) {
+            neuronIterator.next();
+            count += 1;
+        }
+
+        assertEquals(5, count);
     }
 
     @Test
@@ -60,14 +71,6 @@ public class NeuronLayerTest {
             inputValue = inputIterable.next();
             assertEquals(0.0, inputValue, 0.001);
         }
-    }
-
-    @Test
-    public void testgetNetworkSize () {
-        /*
-            Size is 5 networks size + 1 hidden 
-         */
-        assertEquals(6, neuralLayer.getNetworkSize());
     }
 
     @Test

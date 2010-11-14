@@ -94,8 +94,13 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 */
 	private Vector<Double> getOutput() {
 		Vector<Double> output = new Vector<Double>();
-		for (int x = 0; x < getNeuronLayers().get(getNeuronLayers().size() - 1).getNetworkSize(); x++)
-			output.add(new Double(getNeuronLayers().get(getNeuronLayers().size() - 1).getNeuron(x).getOutput()));
+
+        Iterator<Neuron> outputNeuronLayerIterator = getOutputNeuronLayerIterator();
+
+        while (outputNeuronLayerIterator.hasNext()) {
+            output.add(outputNeuronLayerIterator.next().getOutput());
+        }
+
 		return output;
 	}
 
@@ -335,22 +340,30 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 		try {
             
 			int iter2;
-			SynapseLayer synapseLayer = new DefaultSynapseLayer();
             Neuron neuron;
-                           
-			for ( int i = 0; i < getNeuronLayers().get(source).getNetworkSize(); i += 1) {
+            Neuron destinationNeuron;
 
-                neuron = getNeuronLayers().get(source).getNeuron(i);
+            SynapseLayer synapseLayer = new DefaultSynapseLayer();
+            Synapse synapse;
 
-				// int last_neuron_layer = this.neuron_layers.size() - 1;
-				for (iter2 = 0; iter2 < getNeuronLayers().get(destination).getNetworkSize(); iter2++) {
-					if (getNeuronLayers().get(destination).getNeuron(iter2).getNeuronType() == NeuronType.Normal) {
-						Neuron destination_neuron = getNeuronLayers().get(destination).getNeuron(iter2);
-						Synapse synapse = connectNeurons(neuron, destination_neuron);
-						synapseLayer.addSynapse(synapse);
-					}
-				}
-			}
+            Iterator<Neuron> neuronSourceIterator = getNeuronLayers().get(source).getNeuronsIterator();
+            Iterator<Neuron> neuronDestinationIterator;
+
+            while (neuronSourceIterator.hasNext()) {
+                neuron = neuronSourceIterator.next();
+                neuronDestinationIterator = getNeuronLayers().get(destination).getNeuronsIterator();
+
+                while (neuronDestinationIterator.hasNext()) {
+                    destinationNeuron = neuronDestinationIterator.next();
+
+                    if (destinationNeuron.getNeuronType() == NeuronType.Normal) {
+                        synapse = connectNeurons(neuron, destinationNeuron);
+                        synapseLayer.addSynapse(synapse);
+                    }
+                }
+                
+            }
+
 			getSynapseLayers().add(synapseLayer);
 			return true;
 		}
