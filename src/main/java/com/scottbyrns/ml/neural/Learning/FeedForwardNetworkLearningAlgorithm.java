@@ -9,6 +9,9 @@ import com.scottbyrns.ml.neural.FeedForwardNeuralNetwork;
  * Time: 11:19:48 AM
  */
 public interface FeedForwardNetworkLearningAlgorithm {
+    /**
+     * @TODO java doc this file.
+     */
 
     public static final int DEFAULT_MAXIMUM_EPOCHS = 10000;
     public static final double DEFAULT_MINIMUM_ERROR = 0.001;

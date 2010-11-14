@@ -80,21 +80,17 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
             Synapse synapse;
 
-            /**
-             * @TODO simplify
-             */
             while(neuronIterator.hasNext()) {
                 neuron = neuronIterator.next();
                 synapseItterator = neuron.getOutgoingSynapseIterator();
                 while(synapseItterator.hasNext()) {
+
                     synapse = synapseItterator.next();
                     destinationNeuron = synapse.getOutputNeuron();
                     destinationInput = destinationNeuron.getInput();
 
                     synapse.setValue(neuron.getOutput());
-
                     destinationInput += synapse.getValue() * synapse.getWeight();
-
                     destinationNeuron.setInput(destinationInput);
                 }
             }

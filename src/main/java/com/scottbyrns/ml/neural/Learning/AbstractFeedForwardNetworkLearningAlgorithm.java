@@ -16,10 +16,6 @@ import java.util.Vector;
  */
 public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread implements FeedForwardNetworkLearningAlgorithm {
 
-    /**
-     * TODO add reset to default values.
-     */
-
     private boolean running = false;
 
     private FeedForwardNeuralNetwork network;
@@ -51,14 +47,13 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     private HashMap<Synapse, Double> oldWeightUpdate;
 
     // The weight update to perform in each synapse
-    protected HashMap<Synapse, Double>	weightUpdate;
+    protected HashMap<Synapse, Double> weightUpdate;
     private LearningStrategy learningStrategy = LearningStrategy.Generalization;
 
-    	/**
-	 * Resets all the data used by the learning algorithm
-	 */
-	private void reset()
-	{
+    /**
+     * Resets all the data used by the learning algorithm
+     */
+    private void reset() {
 
         setDeltaWeight(new HashMap<Synapse, Double>());
         setErrorPartialDerivative(new HashMap<Synapse, Double>());
@@ -102,12 +97,12 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         resetPartialDerivatives();
     }
 
-	/**
-	 * Resets the partial derivative field of all synapses.
-	 *
-	 * @return Boolean indicating if the operation was successful
-	 */
-	protected boolean resetPartialDerivatives() {
+    /**
+     * Resets the partial derivative field of all synapses.
+     *
+     * @return Boolean indicating if the operation was successful
+     */
+    protected boolean resetPartialDerivatives() {
         try {
             Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
             Iterator<Synapse> synapseIterator;
@@ -128,9 +123,9 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         catch (RuntimeException e) {
             return false;
         }
-	}
+    }
 
-    public AbstractFeedForwardNetworkLearningAlgorithm (FeedForwardNeuralNetwork network, int maximumEpochs, double minimumError) {
+    public AbstractFeedForwardNetworkLearningAlgorithm(FeedForwardNeuralNetwork network, int maximumEpochs, double minimumError) {
         setNetwork(network);
         setMaximumEpochs(maximumEpochs);
         setMinimumError(minimumError);
@@ -138,16 +133,16 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         reset();
     }
 
-    public AbstractFeedForwardNetworkLearningAlgorithm (FeedForwardNeuralNetwork network) {
+    public AbstractFeedForwardNetworkLearningAlgorithm(FeedForwardNeuralNetwork network) {
         this(network, FeedForwardNetworkLearningAlgorithm.DEFAULT_MAXIMUM_EPOCHS, FeedForwardNetworkLearningAlgorithm.DEFAULT_MINIMUM_ERROR);
     }
 
 
-    public AbstractFeedForwardNetworkLearningAlgorithm (FeedForwardNeuralNetwork network, int maximumEpochs) {
+    public AbstractFeedForwardNetworkLearningAlgorithm(FeedForwardNeuralNetwork network, int maximumEpochs) {
         this(network, maximumEpochs, FeedForwardNetworkLearningAlgorithm.DEFAULT_MINIMUM_ERROR);
     }
 
-    public AbstractFeedForwardNetworkLearningAlgorithm (FeedForwardNeuralNetwork network, double minimumError) {
+    public AbstractFeedForwardNetworkLearningAlgorithm(FeedForwardNeuralNetwork network, double minimumError) {
         this(network, FeedForwardNetworkLearningAlgorithm.DEFAULT_MAXIMUM_EPOCHS, minimumError);
     }
 
@@ -156,28 +151,26 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     }
 
     @Override
-	public void run()
-	{
+    public void run() {
         setRunning(true);
 
         if (getLearningStrategy() == LearningStrategy.Memorize) {
             memorize(getPatternSet().getShrunkPatterns(PatternType.All));
-        }
-        else if (getLearningStrategy() == LearningStrategy.Generalization) {
+        } else if (getLearningStrategy() == LearningStrategy.Generalization) {
             generalize(getPatternSet().getShrunkPatterns(PatternType.Training), getPatternSet().getShrunkPatterns(PatternType.Validation));
         }
 
         setRunning(false);
-	}
+    }
 
-	/**
-	 * Trains the network to generalize by the "Early Stopping Method of
-	 * Training
-	 *
-	 * @param trainingPatterns Training set
-	 * @param validationPatterns Validation set
-	 * @return Boolean indicating if the operation was successfull
-	 */
+    /**
+     * Trains the network to generalize by the "Early Stopping Method of
+     * Training
+     *
+     * @param trainingPatterns   Training set
+     * @param validationPatterns Validation set
+     * @return Boolean indicating if the operation was successfull
+     */
     private boolean generalize(Vector<Pattern> trainingPatterns, Vector<Pattern> validationPatterns) {
         try {
 
@@ -213,13 +206,13 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         }
     }
 
-	/**
-	 * Teaches the training set to the network by memorization
-	 *
-	 * @param patterns Training set
-	 * @return Boolean indicating if the operation was successful
-	 */
-	protected boolean memorize(Vector<Pattern> patterns) {
+    /**
+     * Teaches the training set to the network by memorization
+     *
+     * @param patterns Training set
+     * @return Boolean indicating if the operation was successful
+     */
+    protected boolean memorize(Vector<Pattern> patterns) {
         try {
 
             reset();
@@ -229,7 +222,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
                 trainNextEpoch(patterns);
                 setCurrentTrainingError(getNetwork().getPredictionError(patterns));
 
-                if(getCurrentTrainingError() < getMinimumTrainingError()) {
+                if (getCurrentTrainingError() < getMinimumTrainingError()) {
                     setMinimumTrainingErrorWeights(getNetwork().getWeightVector());
                     setMinimumTrainingError(getCurrentTrainingError());
                     setMinimumTrainingErrorEpoch(getCurrentEpoch());
@@ -248,12 +241,12 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         }
     }
 
-	/**
-	 * Calculates the deltas for all the neurons
-	 *
-	 * @param output The desired network output
-	 * @return Boolean indicating if the operation was successful
-	 */
+    /**
+     * Calculates the deltas for all the neurons
+     *
+     * @param output The desired network output
+     * @return Boolean indicating if the operation was successful
+     */
     protected boolean calculateDeltas(Vector<Double> output) {
         try {
             calculateOutputLayerDeltas(output);
@@ -272,23 +265,24 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     }
 
     /**
-	 * @param synapse
-	 * @return the new derivative value. This function assumes that the neruon
-	 *         delta values (the neuron sensitivities) have already been
-	 *         updated; that is, that calculateDeltas(output) has already been
-	 *         called this epoch.
-	 */
-	protected static double calculateErrorPartialDerivative(Synapse synapse) {
+     * @param synapse
+     * @return the new derivative value. This function assumes that the neruon
+     *         delta values (the neuron sensitivities) have already been
+     *         updated; that is, that calculateDeltas(output) has already been
+     *         called this epoch.
+     */
+    protected static double calculateErrorPartialDerivative(Synapse synapse) {
         double aDelta = synapse.getOutputNeuron().getDelta();
         double synapseValue = synapse.getInputNeuron().getOutput();
         return (-aDelta) * synapseValue;
     }
 
-	/**
-	 * Calculates the layer's derived error via the next layer's neuron's error *
-	 * @param layer
-	 * @return Boolean indicating if the operation was successful
-	 */
+    /**
+     * Calculates the layer's derived error via the next layer's neuron's error *
+     *
+     * @param layer
+     * @return Boolean indicating if the operation was successful
+     */
     private boolean calculateHiddenLayerDeltas(NeuronLayer layer) {
         try {
             Iterator<Neuron> neuronIterator = layer.getNeuronsIterator();
@@ -308,6 +302,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 
     /**
      * Calculates the neuron's error via the error of the next layer's neurons
+     *
      * @param neuron
      * @return double
      */
@@ -325,12 +320,12 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         return derivative * sum;
     }
 
-	/**
-	 * Calculate an output layer's error
-	 *
-	 * @param output Desired output
-	 * @return Boolean indicating if the operation was successful
-	 */
+    /**
+     * Calculate an output layer's error
+     *
+     * @param output Desired output
+     * @return Boolean indicating if the operation was successful
+     */
     private boolean calculateOutputLayerDeltas(Vector<Double> output) {
         try {
             NeuronLayer outputLayer = getNetwork().getOutputNeurons();
@@ -353,12 +348,12 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 
 
     /**
-	 * Calculates the neuron's error and stores it in the delta variable
-	 *
-	 * @param target Desired output
+     * Calculates the neuron's error and stores it in the delta variable
+     *
+     * @param target Desired output
      * @param neuron
      * @return double
-	 */
+     */
     private double calculateOutputNeuronDelta(double target, Neuron neuron) {
         double derivative = neuron.calculateDerivative(neuron.getOutput());
         double error = target - neuron.getOutput();
@@ -374,11 +369,9 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     }
 
 
-
     private int getMaximumEpochs() {
         return maximumEpochs;
     }
-
 
 
     private void setMaximumEpochs(int maximumEpochs) {
@@ -393,7 +386,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         this.minimumError = minimumError;
     }
 
-    public void setTargetError (double error) {
+    public void setTargetError(double error) {
         setMinimumError(error);
     }
 
@@ -405,11 +398,9 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         this.currentEpoch = currentEpoch;
     }
 
-    private void incrementEpoch () {
+    private void incrementEpoch() {
         setCurrentEpoch(getCurrentEpoch() + 1);
     }
-
-
 
 
     private double getCurrentValidationError() {
@@ -480,17 +471,17 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         return oldWeightUpdate;
     }
 
-	/**
-	 * Returns the old weight update for the given synapse
-	 *
-	 * @param synapse The synapse associated with the old weight update you want to retrieve
-	 * @return Returns the value of the previous update, returns 0 if it doesn't exist
-	 */
-    protected double getOldWeightUpdate (Synapse synapse) {
+    /**
+     * Returns the old weight update for the given synapse
+     *
+     * @param synapse The synapse associated with the old weight update you want to retrieve
+     * @return Returns the value of the previous update, returns 0 if it doesn't exist
+     */
+    protected double getOldWeightUpdate(Synapse synapse) {
         if (getOldWeightUpdate().get(synapse) == null) {
             return 0.0;
         }
-		return getOldWeightUpdate().get(synapse);
+        return getOldWeightUpdate().get(synapse);
     }
 
     private void setOldWeightUpdate(HashMap<Synapse, Double> oldWeightUpdate) {
@@ -537,32 +528,33 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         this.patternSet = patternSet;
     }
 
-	/**
-	 * Updates the weight update for a given synapse, if one was already stored
-	 * then it is moved to the old weight update, and the new one takes it's
-	 * place
-	 *
-	 * @param synapse The synapse associated with the given weight update
-	 * @param update The value of the update
-	 */
-	protected void setWeightUpdate(Synapse synapse, double update) {
-		Double stored_update = getWeightUpdate().get(synapse);
-		if (stored_update != null) {
+    /**
+     * Updates the weight update for a given synapse, if one was already stored
+     * then it is moved to the old weight update, and the new one takes it's
+     * place
+     *
+     * @param synapse The synapse associated with the given weight update
+     * @param update  The value of the update
+     */
+    protected void setWeightUpdate(Synapse synapse, double update) {
+        Double stored_update = getWeightUpdate().get(synapse);
+        if (stored_update != null) {
             getOldWeightUpdate().put(synapse, stored_update);
         }
-		getWeightUpdate().put(synapse, update);
-	}
+        getWeightUpdate().put(synapse, update);
+    }
 
-	/**
-	 * Trains the neural network with a pattern for one epoch
-	 *
-	 * @param patterns The list of patterns the network is going to be trained with
-	 *            for one epoch
-	 */
-	protected abstract void trainEpoch(Vector<Pattern> patterns);
+    /**
+     * Trains the neural network with a pattern for one epoch
+     *
+     * @param patterns The list of patterns the network is going to be trained with
+     *                 for one epoch
+     */
+    protected abstract void trainEpoch(Vector<Pattern> patterns);
 
     /**
      * Wrap train epoch to take care of incrementing the epoch so the implementer doesnt have to.
+     *
      * @param patterns
      */
     private void trainNextEpoch(Vector<Pattern> patterns) {

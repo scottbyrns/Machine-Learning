@@ -38,7 +38,6 @@ public interface Neuron extends Serializable {
 
     /**
      * Get the Neurons delta
-     * @TODO define better
      * @return
      */
     public double getDelta ();
@@ -79,7 +78,7 @@ public interface Neuron extends Serializable {
 
     /**
      * Get the incoming synapse at a given index.
-     * @TODO make non index lookup possible.
+     * @TODO make non index lookup possible. (Iterator)
      * @param index
      * @return
      */
@@ -99,7 +98,6 @@ public interface Neuron extends Serializable {
 
     /**
      * Get the outgoing synapse at a given index. 
-     * @TODO make non index lookup possible.
      * @param index
      * @return
      */
