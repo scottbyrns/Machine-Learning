@@ -80,10 +80,10 @@ public class NeuronLayerTest {
 
     @Test
     public void testResetValues () {
-        neuralLayer.getNeuron(0).setInput(1.234);
+        neuralLayer.getNeuronsIterator().next().setInput(1.234);
         neuralLayer.resetValues();
-        assertNotSame(1.234, neuralLayer.getNeuron(0).getInput());
-        assertEquals(0.0, neuralLayer.getNeuron(0).getInput(), 0.001);
+        assertNotSame(1.234, neuralLayer.getNeuronsIterator().next().getInput());
+        assertEquals(0.0, neuralLayer.getNeuronsIterator().next().getInput(), 0.001);
     }
 
     @Test
@@ -93,10 +93,10 @@ public class NeuronLayerTest {
         Synapse synapse;
 
         for (int i = 0; i < 10; i += 1) {
-            synapse = new DefaultSynapse(neuralLayer.getNeuron(0), neuralLayer.getNeuron(0), 0.1);
+            synapse = new DefaultSynapse(neuralLayer.getNeuronsIterator().next(), neuralLayer.getNeuronsIterator().next(), 0.1);
             synapse.setWeight(0.123);
             synapses.add(synapse);
-            neuralLayer.getNeuron(0).addOutgoingSynapse(synapse);
+            neuralLayer.getNeuronsIterator().next().addOutgoingSynapse(synapse);
             /* Just in case this test runs before testGetWeight / testSetWeight */
             assertEquals(0.123, synapse.getWeight(), 0.001);
         }
@@ -122,9 +122,9 @@ public class NeuronLayerTest {
 
     @Test
     public void testSetActivationFunction () {
-        neuralLayer.getNeuron(0).setInput(1.0);
+        neuralLayer.getNeuronsIterator().next().setInput(1.0);
         neuralLayer.setActivationFunction(new ActivationFunctionSigmoid());
-        double output = neuralLayer.getNeuron(0).calculateOutput();
+        double output = neuralLayer.getNeuronsIterator().next().calculateOutput();
         assertEquals(0.7310585786300049, output, 0.000000000001);
     }
 

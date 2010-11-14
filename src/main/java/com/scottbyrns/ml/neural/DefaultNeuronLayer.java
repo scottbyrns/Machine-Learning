@@ -164,20 +164,6 @@ public class DefaultNeuronLayer implements NeuronLayer {
     }
 
     /**
-     * Get the neuron at the index specified.
-     * @param index
-     * @return
-     */
-    public Neuron getNeuron(int index) {
-        try {
-            return getNeurons().get(index);
-        }
-        catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-    /**
      * Get the count of neurons of the specified type.
      * @param type
      * @return

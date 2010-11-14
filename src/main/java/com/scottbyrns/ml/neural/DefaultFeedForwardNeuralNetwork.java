@@ -230,15 +230,22 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     public double meanSquaredError(Vector<Double> output) {
         try {
 			double sum = 0;
+            
 			int lastLayerIndex = getNeuronLayers().size() - 1;
 			NeuronLayer lastLayer = getNeuronLayers().get(lastLayerIndex);
-			for (int x = 0; x < output.size(); x++)
-			{
-				double network_output = lastLayer.getNeuron(x).getOutput();
-				double desired_output = output.get(x).doubleValue();
-				sum += Math.pow(desired_output - network_output, 2);
-			}
-			return sum / 2;
+
+            Iterator<Neuron> neuronIterator = lastLayer.getNeuronsIterator();
+            Iterator<Double> outputIterator = output.iterator();
+
+            while (neuronIterator.hasNext()) {
+                double networkOutput = neuronIterator.next().getOutput();
+                double desiredOutput = outputIterator.next();
+
+                sum += Math.pow(desiredOutput - networkOutput, 2);
+            }
+
+            return sum / 2;
+
         }
         catch (RuntimeException e) {
             return -1.0;
@@ -310,17 +317,27 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 */
     protected boolean feedForwardInputLayer(Vector<Double> input) {
         try {
-            NeuronLayer input_layer = getNeuronLayers().get(0);
-            int number_of_bias_nodes = input_layer.getNumberOfNeuronsOfType(NeuronType.Bias);
+
+            NeuronLayer inputLayer = getNeuronLayersIterator().next();
+
+            int numberOfBiasNodes = inputLayer.getNumberOfNeuronsOfType(NeuronType.Bias);
+
+            Vector<Double> paddedInput = new Vector<Double>(input);
+            for (int i = 0; i < numberOfBiasNodes; i += 1) {
+                paddedInput.add(1.0);
+            }
+
+            Iterator<Double> paddedInputIterator = paddedInput.iterator();
+            Iterator<Neuron> inputLayerIterator = inputLayer.getNeuronsIterator();
+
+            Neuron inputNeuron;
+
+            while(paddedInputIterator.hasNext() && inputLayerIterator.hasNext()) {
+                inputNeuron = inputLayerIterator.next();
+                inputNeuron.setInput(paddedInputIterator.next());
+                inputNeuron.calculateOutput();
+            }
             
-            Vector<Double> padded_input = new Vector<Double>(input);
-            for (int i = 0; i < number_of_bias_nodes; i++) {
-                padded_input.add(1.0);
-            }
-            for (int x = 0; x < padded_input.size(); x++) {
-                input_layer.getNeuron(x).setInput(padded_input.get(x));
-                input_layer.getNeuron(x).calculateOutput();
-            }
             return true;
         }
         catch (RuntimeException e) {

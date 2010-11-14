@@ -55,16 +55,6 @@ public interface NeuronLayer {
     public boolean resetWeights ();
 
     /**
-     * Get the neuron at the index specified.
-     *
-     * @param index
-     * @return
-     *
-     * @TODO remove this method from the public api
-     */
-    public Neuron getNeuron (int index);
-
-    /**
      * Get the count of neurons of the specified type.
      * 
      * @param type of neuron to count.
