@@ -82,7 +82,6 @@ public class NeuronTest {
             synapse.setWeight(0.123);
             synapses.add(synapse);
             neuron.addOutgoingSynapse(synapse);
-            /* Just in case this test runs before testGetWeight / testSetWeight */
             assertEquals(0.123, synapse.getWeight(), 0.001);
         }
 
@@ -95,8 +94,6 @@ public class NeuronTest {
 
     }
 
-
-
     @Test
     public void testGetNeuronType () {
         assertEquals(NeuronType.Normal, neuron.getNeuronType());
@@ -108,17 +105,6 @@ public class NeuronTest {
         assertEquals(NeuronType.Bias, neuron.getNeuronType());
     }
 
-
-    /**
-     * Test adding / getting / removing incoming synapses
-     */
-
-    @Test
-    public void testGetIncomingSynapseIterator () {
-        Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
-        assertNotNull(incomingSynapseIterator);
-    }
-
     @Test
     public void testAddIncomingSynapse () {
         Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
@@ -127,6 +113,12 @@ public class NeuronTest {
         Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
         assertEquals(synapse, incomingSynapseIterator.next());
 
+    }
+
+    @Test
+    public void testGetIncomingSynapseIterator () {
+        Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
+        assertNotNull(incomingSynapseIterator);
     }
 
     @Test
@@ -144,17 +136,6 @@ public class NeuronTest {
         assertFalse(incomingSynapseIterator.hasNext());
     }
 
-
-    /**
-     * Test adding / getting / removing outgoing synapses
-     */
-
-//    @Test
-//    public void testGetOutgoingSynapse () {
-//        Synapse synapse = neuron.getOutgoingSynapse(0);
-//        assertNull(synapse);
-//    }
-
     @Test
     public void testAddOutgoingSynapse () {
         Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
@@ -164,6 +145,19 @@ public class NeuronTest {
 
         assertEquals(synapse, outgoingSynapseIterator.next());
     }
+
+    @Test
+    public void testGetOutgoingSynapseIterator () {
+        neuron.addOutgoingSynapse(new DefaultSynapse(neuron, neuron, 1.0));
+        Iterator<Synapse> outgoingSynapseIterator = neuron.getOutgoingSynapseIterator();
+        Synapse synapse;
+        while (outgoingSynapseIterator.hasNext()) {
+            synapse = outgoingSynapseIterator.next();
+            synapse.setValue(1.23);
+            assertEquals(1.23, synapse.getValue(), 0.001);
+        }
+    }
+
 
     @Test
     public void testRemoveOutgoingSynapse () {
@@ -178,31 +172,28 @@ public class NeuronTest {
         assertFalse(outgoingSynapseIterator.hasNext());
     }
 
-
     @Test
     public void testSetActivationFunction () {
         neuron.setInput(1.0);
         neuron.setActivationFunction(new ActivationFunctionSigmoid());
         double output = neuron.calculateOutput();
-        assertEquals(0.7310585786300049, output, 0.000000000001);
+        assertEquals(new ActivationFunctionSigmoid().calculate(1.0), output, 0.000000000001);
     }
 
     @Test
     public void testCalculateOutput () {
+        neuron.setInput(0.123);
+        neuron.setActivationFunction(new ActivationFunctionSigmoid());
         double output = neuron.calculateOutput();
-        assertEquals(0.0, output, 0.001);
+        assertEquals(new ActivationFunctionSigmoid().calculate(0.123), output, 0.001);
     }
 
     @Test
-    public void testGetOutgoingSynapseIterator () {
-        neuron.addOutgoingSynapse(new DefaultSynapse(neuron, neuron, 1.0));
-        Iterator<Synapse> outgoingSynapseIterator = neuron.getOutgoingSynapseIterator();
-        Synapse synapse;
-        while (outgoingSynapseIterator.hasNext()) {
-            synapse = outgoingSynapseIterator.next();
-            synapse.setValue(1.23);
-            assertEquals(1.23, synapse.getValue(), 0.001);
-        }
+    public void testCalculateDerivative () {
+        neuron.setInput(0.123);
+        neuron.setActivationFunction(new ActivationFunctionSigmoid());
+        double output = neuron.calculateDerivative(neuron.getOutput());
+        assertEquals(new ActivationFunctionSigmoid().calculateDerivate(neuron.getOutput()), output, 0.001);
     }
 
 }

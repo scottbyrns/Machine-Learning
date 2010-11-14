@@ -121,7 +121,6 @@ public interface Neuron extends Serializable {
      */
     public void removeOutgoingSynapse (Synapse synapse);
 
-
     /**
      * Set the activation function of the neuron
      * 
