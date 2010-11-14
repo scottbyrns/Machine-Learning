@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.Vector;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by scott
@@ -35,12 +35,43 @@ public class SynapseLayerTest {
     }
 
     @Test
-    public void testAdd () {
+    public void testAddSynapse () {
         synapseLayer.addSynapse(synapse);
         Iterator<Synapse> synapseIterator = synapseLayer.getSynapsesIterator();
         assertTrue(synapseIterator.hasNext());
     }
 
+    @Test
+    public void testGetWeightVector () {
+        synapseLayer.addSynapse(synapse);
+        synapseLayer.addSynapse(synapse);
+
+        Vector<Double> weightVector = synapseLayer.getWeightVector();
+
+        Iterator<Double> weightVectorIterator = weightVector.iterator();
+        while (weightVectorIterator.hasNext()) {
+            assertEquals(0.123, weightVectorIterator.next(), 0.001);
+        }
+    }
+
+    @Test
+    public void testSetWeightVector () {
+        synapseLayer.addSynapse(synapse);
+        synapseLayer.addSynapse(synapse);
+
+        Vector<Double> newWeightVector = new Vector<Double>();
+        newWeightVector.add(0.321);
+        newWeightVector.add(0.321);
+
+        synapseLayer.setWeightVector(newWeightVector.iterator());
+
+        Vector<Double> weightVector = synapseLayer.getWeightVector();
+
+        Iterator<Double> weightVectorIterator = weightVector.iterator();
+        while (weightVectorIterator.hasNext()) {
+            assertEquals(0.321, weightVectorIterator.next(), 0.001);
+        }
+    }
 
     @After
     public void teardown () {

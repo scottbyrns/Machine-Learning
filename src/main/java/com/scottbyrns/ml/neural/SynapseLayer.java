@@ -19,13 +19,6 @@ public interface SynapseLayer {
     public void addSynapse(Synapse synapse);
 
     /**
-     * Get a weight vector representing the weights of the synapses in this layer.
-     *
-     * @return Vector of weight values, null in case of error.
-     */
-    public Vector<Double> getWeightVector();
-
-    /**
      * Get an iterator for the synapse vector.
      *
      * @return
@@ -33,9 +26,16 @@ public interface SynapseLayer {
     public Iterator<Synapse> getSynapsesIterator ();
 
     /**
+     * Get a weight vector representing the weights of the synapses in this layer.
+     *
+     * @return Vector of weight values, null in case of error.
+     */
+    public Vector<Double> getWeightVector();
+
+    /**
      * Set the weights of the synapses in this layer to the next values
      * of the provided weightVectorIterator
-     * 
+     *
      * @param weightVectorIterator
      */
     public void setWeightVector (Iterator<Double> weightVectorIterator);
