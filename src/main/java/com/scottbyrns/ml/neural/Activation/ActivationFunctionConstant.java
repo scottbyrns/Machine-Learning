@@ -15,7 +15,7 @@ public class ActivationFunctionConstant implements ActivationFunction {
 	 * @return Returns 1.0
 	 */
 	public double calculate(double value) {
-		value++; // FIXME Replace with appropriate SuppressWarning
+		value++; // TODO FIXME Replace with appropriate SuppressWarning
 		return 1;
 	}
 
@@ -27,8 +27,8 @@ public class ActivationFunctionConstant implements ActivationFunction {
 	 *            returns the same value
 	 * @return Returns 0.0
 	 */
-	public double calculateDerivate(double value) {
-		value++; // FIXME Replace with appropriate SuppressWarning
+	public double calculateDerivative(double value) {
+		value++; // TODO FIXME Replace with appropriate SuppressWarning
 		return 0;
 	}
 }

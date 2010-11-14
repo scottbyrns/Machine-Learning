@@ -234,7 +234,7 @@ public class DefaultNeuron implements Neuron {
 	 *         supplying the given value
 	 */
     public double calculateDerivative(double value) {
-        return activationFunction.calculateDerivate(value);
+        return activationFunction.calculateDerivative(value);
     }
 
 }

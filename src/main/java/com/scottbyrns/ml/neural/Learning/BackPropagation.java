@@ -10,10 +10,12 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 12, 2010
  * Time: 11:57:17 PM
  * @TODO finish javadocs
+ *
+ * @version 1.0
  */
 public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm  {
 

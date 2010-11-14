@@ -193,7 +193,7 @@ public class NeuronTest {
         neuron.setInput(0.123);
         neuron.setActivationFunction(new ActivationFunctionSigmoid());
         double output = neuron.calculateDerivative(neuron.getOutput());
-        assertEquals(new ActivationFunctionSigmoid().calculateDerivate(neuron.getOutput()), output, 0.001);
+        assertEquals(new ActivationFunctionSigmoid().calculateDerivative(neuron.getOutput()), output, 0.001);
     }
 
 }

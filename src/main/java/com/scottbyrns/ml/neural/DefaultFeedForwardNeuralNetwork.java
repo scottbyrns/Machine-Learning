@@ -160,7 +160,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
 	/**
-	 * Returns the number of neurons in the input layer
+	 * Returns the number of neurons in the input layer matching the NeuronType specified.
 	 *
 	 * @param neuronType of neuron (use constants in class DefaultNeuron)
 	 * @return Number of neurons in the input layer
@@ -170,7 +170,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
     /**
-     * Get the number of output neurons in the network.
+     * Get the number of output neurons in the network matching the NeuronType specified.
      *
      * @param neuronType of neuron (use constants in class DefaultNeuron)
      * @return Number of neurons in the output layer
