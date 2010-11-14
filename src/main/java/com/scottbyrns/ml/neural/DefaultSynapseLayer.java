@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
+ * Weight Matrix
  * Created by scott
  * Date: Nov 11, 2010
  * Time: 5:42:42 PM
@@ -18,21 +19,34 @@ public class DefaultSynapseLayer implements SynapseLayer {
 
     /**
      * Add a synapse to the layer.
-     * @param synapse synapse to addSynapse
+     *
+     * @param synapse to add
      */
     public void addSynapse(Synapse synapse) {
         getSynapses().add(synapse);
     }
 
     /**
+     * Get an iterator for the synapse vector.
+     *
+     * @return iterator
+     */
+    public Iterator<Synapse> getSynapsesIterator () {
+        return getSynapses().iterator();
+    }
+
+    /**
      * Get a weight vector representing the weights of the synapses in this layer.
+     *
      * @return Vector of weight values, null in case of error.
      */
     public Vector<Double> getWeightVector() {
         try {
 			Vector<Double> list = new Vector<Double>();
-			for (Synapse synapse : getSynapses()) {
-                list.add(synapse.getWeight());
+            Iterator<Synapse> synapseIterator = getSynapsesIterator();
+
+            while (synapseIterator.hasNext()) {
+                list.add(synapseIterator.next().getWeight());
             }
 
 			return list;
@@ -43,7 +57,22 @@ public class DefaultSynapseLayer implements SynapseLayer {
     }
 
     /**
+     * Set the weights of the synapses in this layer to the next values
+     * of the provided weightVectorIterator
+     *
+     * @param weightVectorIterator to iterate over for new weight values.
+     */
+    public void setWeightVector (Iterator<Double> weightVectorIterator) {
+        Iterator<Synapse> synapseIterator = getSynapsesIterator();
+
+        while (synapseIterator.hasNext() && weightVectorIterator.hasNext()) {
+            synapseIterator.next().setWeight(weightVectorIterator.next());
+        }
+    }
+
+    /**
      * Get the synapse vector
+     *
      * @return synapse vector
      */
     private Vector<Synapse> getSynapses() {
@@ -52,30 +81,10 @@ public class DefaultSynapseLayer implements SynapseLayer {
 
     /**
      * Set the synapse vector to the provided input vector.
+     *
      * @param synapses new synapse vector.
      */
     private void setSynapses(Vector<Synapse> synapses) {
         this.synapses = synapses;
-    }
-
-    /**
-     * Get an iterator for the synapse vector.
-     * @return iterator
-     */
-    public Iterator<Synapse> getSynapsesIterator () {
-        return getSynapses().iterator();
-    }
-
-    /**
-     * Set the weights of the synapses in this layer to the next values
-     * of the provided weightVectorIterator
-     * @param weightVectorIterator
-     */
-    public void setWeightVector (Iterator<Double> weightVectorIterator) {
-        Iterator<Synapse> synapseIterator = getSynapsesIterator();
-
-        while (synapseIterator.hasNext() && weightVectorIterator.hasNext()) {
-            synapseIterator.next().setWeight(weightVectorIterator.next());
-        }
     }
 }

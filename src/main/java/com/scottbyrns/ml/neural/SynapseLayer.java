@@ -14,14 +14,14 @@ public interface SynapseLayer {
     /**
      * Add a synapse to the layer.
      *
-     * @param synapse
+     * @param synapse to add
      */
     public void addSynapse(Synapse synapse);
 
     /**
      * Get an iterator for the synapse vector.
      *
-     * @return
+     * @return iterator
      */
     public Iterator<Synapse> getSynapsesIterator ();
 
@@ -36,7 +36,7 @@ public interface SynapseLayer {
      * Set the weights of the synapses in this layer to the next values
      * of the provided weightVectorIterator
      *
-     * @param weightVectorIterator
+     * @param weightVectorIterator to iterate over for new weight values.
      */
     public void setWeightVector (Iterator<Double> weightVectorIterator);
 
