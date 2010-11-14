@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 /**
  * Object representation of a Neuron
+ *  
  * Created by scott
  * Date: Nov 10, 2010
  * Time: 5:33:08 PM

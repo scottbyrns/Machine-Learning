@@ -258,6 +258,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 *
 	 * @param input The network's input
 	 * @return Returns the network's output, or null in case of error
+     * @TODO refactor
 	 */
     public Vector<Double> feedForward(Vector<Double> input) {
         try {

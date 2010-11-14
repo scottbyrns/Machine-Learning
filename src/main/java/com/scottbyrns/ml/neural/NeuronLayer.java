@@ -10,6 +10,9 @@ import java.util.Vector;
  * Created by scott
  * Date: Nov 11, 2010
  * Time: 11:14:39 AM
+ *
+ * @TODO Ensure DefaulNeuronLayer.java is sorted and documented the same as this file. Ensure NeuronLayerTest.java
+ * tests all methods in the public API.
  */
 public interface NeuronLayer {
 
@@ -27,12 +30,6 @@ public interface NeuronLayer {
      */
     public boolean feedForward ();
 
-    /**
-     * Get the neuron layers input
-     *
-     * @return a vector of all the neurons inputs.
-     */
-    public Vector<Double> getInput ();
     /**
      * Get the neuron layers output
      *

@@ -7,6 +7,7 @@ import java.util.Vector;
 
 /**
  * Representation of a layer of neurons.
+ * 
  * Created by scott
  * Date: Nov 11, 2010
  * Time: 11:37:24 AM
@@ -40,6 +41,7 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Calculate the neurons output by passing inputs by the activation function.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean calculateOutput () {
@@ -65,20 +67,19 @@ public class DefaultNeuronLayer implements NeuronLayer {
     public boolean feedForward() {
         try {
             Iterator<Neuron> neuronIterator = getNeuronsIterator();
-            Iterator<Synapse> synapseItterator;
+            Iterator<Synapse> synapseIterator;
 
-            Neuron neuron;
-            Neuron destinationNeuron;
-            double destinationInput;
-
+            Neuron neuron, destinationNeuron;
             Synapse synapse;
+
+            double destinationInput;
 
             while(neuronIterator.hasNext()) {
                 neuron = neuronIterator.next();
-                synapseItterator = neuron.getOutgoingSynapseIterator();
-                while(synapseItterator.hasNext()) {
+                synapseIterator = neuron.getOutgoingSynapseIterator();
 
-                    synapse = synapseItterator.next();
+                while(synapseIterator.hasNext()) {
+                    synapse = synapseIterator.next();
                     destinationNeuron = synapse.getOutputNeuron();
                     destinationInput = destinationNeuron.getInput();
 
@@ -95,25 +96,9 @@ public class DefaultNeuronLayer implements NeuronLayer {
         }
     }
 
-
-    /**
-     * Get the neuron layers input
-     * @return a vector of all the neurons inputs.
-     */
-    public Vector<Double> getInput() {
-        Vector<Double> input = new Vector<Double>();
-
-        Iterator<Neuron> neuronIterator = getNeuronsIterator();
-
-        while(neuronIterator.hasNext()) {
-            input.add(neuronIterator.next().getInput());
-        }
-
-        return input;
-    }
-
     /**
      * Get the neuron layers output
+     *
      * @return a vector of all the neurons outputs.
      */
     public Vector<Double> getOutput() {
@@ -131,14 +116,17 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Reset the layers neurons values.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean resetValues() {
         try {
             Iterator<Neuron> neuronIterator = getNeuronsIterator();
+            
             while (neuronIterator.hasNext()) {
                 neuronIterator.next().resetValues();
             }
+            
             return true;
         }
         catch (RuntimeException e) {
@@ -148,14 +136,17 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Reset the layers neurons weights.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean resetWeights() {
         try {
             Iterator<Neuron> neuronIterator = getNeuronsIterator();
+
             while (neuronIterator.hasNext()) {
                 neuronIterator.next().resetWeights();
             }
+
             return true;
         }
         catch (RuntimeException e) {
@@ -165,8 +156,9 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Get the count of neurons of the specified type.
-     * @param type
-     * @return
+     *
+     * @param type of neuron to count.
+     * @return A count of neurons matching the specified type.
      */
     public int getNumberOfNeuronsOfType(NeuronType type) {
         try {
@@ -179,6 +171,7 @@ public class DefaultNeuronLayer implements NeuronLayer {
                     count += 1;
                 }
             }
+            
             return count;
         }
         catch (RuntimeException e) {
@@ -189,15 +182,18 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Set the activation function of the whole neural layer
-     * @param activationFunction
+     *
+     * @param activationFunction activation function to use for all neurons in this layer
      * @return Boolean indication of operations success.
      */
     public boolean setActivationFunction(ActivationFunction activationFunction) {
         try {
             Iterator<Neuron> neuronIterator = getNeuronsIterator();
+
             while (neuronIterator.hasNext()) {
                 neuronIterator.next().setActivationFunction(activationFunction);
             }
+
             return true;
         }
         catch (RuntimeException e) {
@@ -206,7 +202,17 @@ public class DefaultNeuronLayer implements NeuronLayer {
     }
 
     /**
+     * Get an iterator for the neuron vector.
+     *
+     * @return Iterator
+     */
+    public Iterator<Neuron> getNeuronsIterator () {
+        return getNeurons().iterator();
+    }
+
+    /**
      * Get the neuron vector of this layer
+     *
      * @return neuron vector
      */
     private Vector<Neuron> getNeurons () {
@@ -215,17 +221,10 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Set the neurons vector to the provided input
+     *
      * @param neurons new neuron vector
      */
     private void setNeurons (Vector<Neuron> neurons) {
         this.neurons = neurons;
-    }
-
-    /**
-     * Get an iterator for the neuron vector.
-     * @return Iterator
-     */
-    public Iterator<Neuron> getNeuronsIterator () {
-        return getNeurons().iterator();
     }
 }

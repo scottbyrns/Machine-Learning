@@ -61,21 +61,10 @@ public class NeuronLayerTest {
     }
 
     @Test
-    public void testGetInput () {
-        Vector<Double> input = neuralLayer.getInput();
-        Iterator<Double> inputIterable = input.iterator();
-
-        double inputValue;
-
-        while (inputIterable.hasNext()) {
-            inputValue = inputIterable.next();
-            assertEquals(0.0, inputValue, 0.001);
-        }
-    }
-
-    @Test
     public void testGetOutput () {
-
+        /**
+         * @TODO write test
+         */
     }
 
     @Test
