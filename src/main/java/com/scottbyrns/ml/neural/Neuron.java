@@ -6,11 +6,14 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 /**
- * Object representation of a Neuron
+ * An artificial neuron that is an abstraction of biological
+ * neurons in the form of a linear threshold model.
  *  
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 10, 2010
  * Time: 5:33:08 PM
+ *
+ * @version 1.0
  */
 public interface Neuron extends Serializable {
 

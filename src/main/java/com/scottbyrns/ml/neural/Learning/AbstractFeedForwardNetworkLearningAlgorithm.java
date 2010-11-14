@@ -335,8 +335,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      */
     private boolean calculateOutputLayerDeltas(Vector<Double> output) {
         try {
-            NeuronLayer outputLayer = getNetwork().getOutputNeurons();
-
             Iterator<Neuron> outputLayerIterator = getNetwork().getOutputNeuronLayerIterator();
             Iterator<Double> outputDoubleIterator = output.iterator();
             Neuron neuron;

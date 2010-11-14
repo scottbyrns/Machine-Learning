@@ -3,10 +3,14 @@ package com.scottbyrns.ml.neural;
 import java.io.Serializable;
 
 /**
- * Object representation of a synapse.
- * Created by scott
+ * An artificial synapse that is an abstraction of biological
+ * synapses in the form of a weight unit.
+ *
+ * @author Scott Byrns
  * Date: Nov 10, 2010
  * Time: 5:29:01 PM
+ *
+ * @version 1.0
  */
 public interface Synapse extends Serializable {
     

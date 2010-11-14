@@ -6,10 +6,14 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
- * Object representation of a Neuron
- * Created by scott
+ * An artificial neuron that is an abstraction of biological
+ * neurons in the form of a linear threshold model.
+ *
+ * @author Scott Byrns
  * Date: Nov 10, 2010
  * Time: 5:37:20 PM
+ *
+ * @version 1.0
  */
 public class DefaultNeuron implements Neuron {
 

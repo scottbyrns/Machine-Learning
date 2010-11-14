@@ -4,10 +4,13 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
- * Weight Matrix
- * Created by scott
+ * Weight Matrix.
+ * 
+ * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 5:41:34 PM
+ *
+ * @version 1.0
  */
 public interface SynapseLayer {
 

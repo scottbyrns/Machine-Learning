@@ -1,14 +1,9 @@
 package com.scottbyrns.ml.neural;
 
-import com.scottbyrns.ml.datasets.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Vector;
-
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -31,32 +26,6 @@ public class FeedForwardNeuralNetworkTest {
         /**
          * @TODO implement
          */
-    }
-
-    @Test
-    public void testMeasurePatternListError () {
-        /**
-         * @TODO see if this can be tested better. The outcome of this method changes each time
-         * so I am only testing to see if an error has occured.
-         */
-        Vector<Double> output = new Vector<Double>();
-        output.add(1.3);
-        output.add(0.2);
-
-        Vector<Pattern> patternList = new Vector<Pattern>();
-        patternList.add(new DefaultPattern(output, output));
-
-        double error = feedForwardNetwork.measurePatternListError(patternList);
-        assertTrue(error != (-1.0));
-    }
-
-    @Test
-    public void testMeansSquaredError () {
-        Vector<Double> output = new Vector<Double>();
-        output.add(1.3);
-        output.add(0.2);
-        double error = feedForwardNetwork.meanSquaredError(output);
-        assertEquals(0.8650000000000001, error, 0.0000000001);
     }
 
     @Test
