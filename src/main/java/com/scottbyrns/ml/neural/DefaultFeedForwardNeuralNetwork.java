@@ -3,7 +3,6 @@ package com.scottbyrns.ml.neural;
 import com.scottbyrns.ml.Mathematics;
 import com.scottbyrns.ml.datasets.Pattern;
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
-import com.scottbyrns.ml.neural.Activation.ActivationFunctionLinear;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
 
 import java.util.Iterator;
@@ -28,7 +27,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     /**
      * Create an instance of a DefaultFeedForwardNeuralNetwork from an existing FeedForwardNeuralNetwork
      * 
-     * @param feedForwardNeuralNetwork
+     * @param feedForwardNeuralNetwork neural network to copy.
      */
     public DefaultFeedForwardNeuralNetwork(FeedForwardNeuralNetwork feedForwardNeuralNetwork) {
         /* Sorry for the formatting, this method call was way too long visually otherwise */
@@ -60,14 +59,13 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      */
     public DefaultFeedForwardNeuralNetwork(int inputSize, int[] hiddenSizes, int outputSize, ActivationFunction activationFunction) {
         try {
-            /**
-             * @TODO refactor
-             */
-			// Create the layers
+
+            // Create the layers
 			int bias_nodes_per_layer = DefaultFeedForwardNeuralNetwork.DEFAULT_NUMBER_BIAS_NEURONS;
 			setNeuronLayers(new Vector<NeuronLayer>());
-			getNeuronLayers().add(new DefaultNeuronLayer(inputSize, new ActivationFunctionLinear(), bias_nodes_per_layer));
-			for (int x = 0; x < hiddenSizes.length; x++) {
+			getNeuronLayers().add(new DefaultNeuronLayer(inputSize, activationFunction, bias_nodes_per_layer));
+
+            for (int x = 0; x < hiddenSizes.length; x++) {
                 getNeuronLayers().add(new DefaultNeuronLayer(hiddenSizes[x], activationFunction, bias_nodes_per_layer));
             }
 
@@ -80,7 +78,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
         }
         catch (RuntimeException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -114,21 +112,31 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      *
      * @param input The network's input
      * @return Returns the network's output, or null in case of error
-     * @TODO refactor
      */
     public Vector<Double> feedForward(Vector<Double> input) {
         try {
             resetValues();
             feedForwardInputLayer(input);
-            getNeuronLayers().get(0).feedForward();
-            for (int x = 1; x < (getNeuronLayers().size() - 1); x++)
-            {
-                getNeuronLayers().get(x).calculateOutput();
-                getNeuronLayers().get(x).feedForward();
+
+            Iterator<NeuronLayer> neuronIterator = getNeuronLayersIterator();
+            NeuronLayer neuronLayer;
+
+            neuronIterator.next().feedForward();
+
+            while (neuronIterator.hasNext()) {
+                neuronLayer = neuronIterator.next();
+
+                if (neuronIterator.hasNext()) {
+                    neuronLayer.calculateOutput();
+                    neuronLayer.feedForward();
+                }
+                else {
+                    neuronLayer.calculateOutput();
+                    return neuronLayer.getOutput();
+                }
             }
-            int output_layer_index = getNeuronLayers().size() - 1;
-            getNeuronLayers().get(output_layer_index).calculateOutput();
-            return getNeuronLayers().get(output_layer_index).getOutput();
+
+            return null;
         }
         catch (RuntimeException e) {
             return null;
@@ -140,12 +148,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      *
      * @param neuronType of neuron (use constants in class DefaultNeuron)
      * @return Number of neurons in the hidden layers
-     * @TODO refactor
      */
     public int[] getNumberNeuronsHidden(NeuronType neuronType) {
+        
         int[] hidden = new int[getNeuronLayers().size() - 2];
-        for (int x = 1; x < getNeuronLayers().size() - 1; x++)
+        for (int x = 1; x < getNeuronLayers().size() - 1; x++) {
             hidden[x - 1] = getNeuronLayers().get(x).getNumberOfNeuronsOfType(neuronType);
+        }
+
         return hidden;
     }
 
@@ -154,7 +164,6 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 *
 	 * @param neuronType of neuron (use constants in class DefaultNeuron)
 	 * @return Number of neurons in the input layer
-     * @TODO refactor
 	 */
     public int getNumberNeuronsInput(NeuronType neuronType) {
         return getNeuronLayers().get(0).getNumberOfNeuronsOfType(neuronType);
@@ -165,7 +174,6 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      *
      * @param neuronType of neuron (use constants in class DefaultNeuron)
      * @return Number of neurons in the output layer
-     * @TODO refactor
      */
     public int getNumberNeuronsOutput(NeuronType neuronType) {
         return getNeuronLayers().get(getNumberNeuronsHidden(NeuronType.Normal).length + 1).getNumberOfNeuronsOfType(NeuronType.Normal);
@@ -256,13 +264,17 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      */
     public double getPredictionError(Vector<Pattern> patterns) {
         try {
-            /**
-             * @TODO use an iterator
-             */
             double error = 0;
-            for (Pattern pattern : patterns) {
+
+            Iterator<Pattern> patternIterator = patterns.iterator();
+            Pattern pattern;
+
+            while (patternIterator.hasNext()) {
+                pattern = patternIterator.next();
+                
                 error += getPredictionError(pattern.getInput(), pattern.getOutput());
             }
+
             return error / patterns.size();
 
         }
@@ -279,14 +291,17 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      */
     public Vector<Double> getWeightVector() {
         Vector<Double> list = new Vector<Double>();
-        /**
-         * @TODO use an iterator
-         */
-        for (SynapseLayer synapseLayer: getSynapseLayers()) {
-            for (Double value : synapseLayer.getWeightVector()) {
-                list.add(value);
+
+        Iterator<SynapseLayer> synapseLayerIterator = getSynapseLayersIterator();
+        Iterator<Double> doubleIterator;
+
+        while (synapseLayerIterator.hasNext()) {
+            doubleIterator = synapseLayerIterator.next().getWeightVector().iterator();
+            while (doubleIterator.hasNext()) {
+                list.add(doubleIterator.next());
             }
         }
+
         return list;
     }
 
@@ -335,6 +350,8 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
     /**
      * Returns the current error for the a vector of patterns
+     *
+     * @note Nov 14, 2010 Even though this method is not in use please retain it for future use.
      *
      * @param patterns The list of patterns that will be tested
      * @return The mean squared error for the list of patterns, or -1.0 in case of error
