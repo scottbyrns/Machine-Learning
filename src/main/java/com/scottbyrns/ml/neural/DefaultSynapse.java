@@ -7,6 +7,10 @@ package com.scottbyrns.ml.neural;
  */
 public class DefaultSynapse implements Synapse {
 
+    /**
+     * @TODO java doc this file
+     */
+
     private Neuron inputNeuron;
     private Neuron outputNeuron;
     private double weight;
