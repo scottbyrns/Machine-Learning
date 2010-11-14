@@ -14,37 +14,43 @@ public interface Neuron extends Serializable {
 
     /**
      * Get the input of the neuron.
-     * @return
+     * 
+     * @return input of the neuron
      */
     public double getInput ();
 
     /**
      * Set the input of the neuron.
-     * @param input
+     * 
+     * @param input of the neuron
      */
     public void setInput (double input);
 
     /**
      * Get the neurons output value.
-     * @return
+     *
+     * @return neurons output value
      */
     public double getOutput ();
 
     /**
      * Set the neurons output value.
-     * @param output
+     *
+     * @param output value of the neuron
      */
     public void setOutput (double output);
 
     /**
      * Get the Neurons delta
-     * @return
+     *
+     * @return neurons delta
      */
     public double getDelta ();
 
     /**
      * Set the Neurons delta.
-     * @param delta
+     *
+     * @param delta of the neuron
      */
     public void setDelta (double delta);
 
@@ -60,71 +66,72 @@ public interface Neuron extends Serializable {
 
     /**
      * Get the neuron type.
-     * @return
+     * 
+     * @return type of the neuron
      */
     public NeuronType getNeuronType ();
 
     /**
      * Set the neuron type.
-     * @param neuronType
+     * 
+     * @param neuronType of the neuron
      */
     public void setNeuronType (NeuronType neuronType);
 
     /**
      * Add an incoming synapse to the neuron.
-     * @param synapse
+     * 
+     * @param synapse incoming synapse
      */
     public void addIncomingSynapse (Synapse synapse);
 
     /**
-     * Get the incoming synapse at a given index.
-     * @TODO make non index lookup possible. (Iterator)
-     * @param index
-     * @return
+     * Get an iterator for the incoming synapse vector.
+     *
+     * @return iterator for the incoming synapse vector
      */
-    public Synapse getIncomingSynapse (int index);
+    public Iterator<Synapse> getIncomingSynapseIterator();
 
     /**
      * Remove an incoming synapse.
-     * @param synapse
+     *
+     * @param synapse to remove
      */
     public void removeIncomingSynapse (Synapse synapse);
 
     /**
      * Add an outgoing synapse to the neuron.
-     * @param synapse
+     *
+     * @param synapse outgoing synapse
      */
     public void addOutgoingSynapse (Synapse synapse);
 
     /**
-     * Get the outgoing synapse at a given index. 
-     * @param index
-     * @return
-     */
-    public Synapse getOutgoingSynapse (int index);
-
-    /**
      * Get an iterator for the outgoing synapse vector.
-     * @return
+     *
+     * @return iterator for the outgoing synapse vector
      */
     public Iterator<Synapse> getOutgoingSynapseIterator();
 
     /**
      * Remove an outgoing synapse.
-     * @param synapse
+     * 
+     * @param synapse to remove
      */
     public void removeOutgoingSynapse (Synapse synapse);
 
 
     /**
      * Set the activation function of the neuron
-     * @param activationFunction
+     * 
+     * @param activationFunction for this neuron
      * @return Boolean indication of operations success.
      */
     public boolean setActivationFunction (ActivationFunction activationFunction);
 
     /**
      * Calculates the neuron's output by activating the current input
+     * 
      * @return double Output of the neuron.
      */
     public double calculateOutput ();
@@ -135,7 +142,7 @@ public interface Neuron extends Serializable {
 	 *
 	 * @param value Value to enter into the derivative of the activation function
 	 * @return Returns the output of the activation function's derivative after
-	 *         inputing the given value
+	 *         supplying the given value
 	 */
     public double calculateDerivative(double value);
 }

@@ -406,10 +406,10 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
     /**
-     * Get the neuron layer vector.
+     * Get all of the neuron layers in the network.
      * @return neuron layer vector
      */
-    public Vector<NeuronLayer> getNeuronLayers() {
+    private Vector<NeuronLayer> getNeuronLayers() {
         return neuronLayers;
     }
 
@@ -430,10 +430,10 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     }
 
     /**
-     * Get the synapse layer vector.
+     * Get all of the synapse layers in the network.
      * @return synapse layer vector
      */
-    public Vector<SynapseLayer> getSynapseLayers() {
+    private Vector<SynapseLayer> getSynapseLayers() {
         return synapseLayers;
     }
 

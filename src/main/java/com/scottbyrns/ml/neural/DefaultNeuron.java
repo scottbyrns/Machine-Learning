@@ -87,44 +87,12 @@ public class DefaultNeuron implements Neuron {
         incomingSynapses.add(synapse);
     }
 
-    /**
-     * Get the incoming synapse at a given index.
-     * @param index
-     * @return The Synapse at that index or null if the index is out of bounds.
-     */
-    public Synapse getIncomingSynapse (int index) {
-        Synapse synapse;
-        try {
-            synapse = incomingSynapses.get(index);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            synapse = null;
-        }
-        return synapse;
-    }
-
     public void removeIncomingSynapse (Synapse synapse) {
         incomingSynapses.remove(synapse);
     }
 
     public void addOutgoingSynapse (Synapse synapse) {
         outgoingSynapses.add(synapse);
-    }
-
-    /**
-     * Get the outgoing synapse at a given index.
-     * @param index
-     * @return The Synapse at that index or null if the index is out of bounds.
-     */
-    public Synapse getOutgoingSynapse (int index) {
-        Synapse synapse;
-        try {
-            synapse = outgoingSynapses.get(index);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            synapse = null;
-        }
-        return synapse;
     }
 
     public void removeOutgoingSynapse (Synapse syanpse) {
@@ -162,7 +130,17 @@ public class DefaultNeuron implements Neuron {
     }
 
     /**
-     * Get an itterator for the outgoing synapse vector.
+     * Get an iterator for the incoming synapse vector.
+     *
+     * @return
+     */
+    public Iterator<Synapse> getIncomingSynapseIterator() {
+        return incomingSynapses.iterator();
+    }
+
+    /**
+     * Get an iterator for the outgoing synapse vector.
+     * 
      * @return
      */
     public Iterator<Synapse> getOutgoingSynapseIterator() {

@@ -27,7 +27,15 @@ public interface FeedForwardNetworkLearningAlgorithm {
     public LearningStrategy getLearningStrategy();
     public void setLearningStrategy(LearningStrategy learningStrategy);
 
-    public void start();
+    /**
+     * Start training the neural network.
+     */
+    public void startTraining();
+
+    /**
+     * Is the network currently training?
+     * @return boolean representation of execution state.
+     */
     public boolean isRunning();
 
     public FeedForwardNeuralNetwork getNetwork();

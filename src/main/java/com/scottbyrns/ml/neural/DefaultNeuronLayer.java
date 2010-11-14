@@ -67,7 +67,8 @@ public class DefaultNeuronLayer implements NeuronLayer {
 
     /**
      * Forward the values to the next layer.
-     * @return
+     *
+     * @return Boolean indication of operations success.
      */
     public boolean feedForward() {
         try {

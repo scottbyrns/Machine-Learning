@@ -114,22 +114,34 @@ public class NeuronTest {
      */
 
     @Test
-    public void testGetIncomingSynapse () {
-        Synapse synapse = neuron.getIncomingSynapse(0);
-        assertNull(synapse);
+    public void testGetIncomingSynapseIterator () {
+        Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
+        assertNotNull(incomingSynapseIterator);
     }
 
     @Test
     public void testAddIncomingSynapse () {
         Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
         neuron.addIncomingSynapse(synapse);
-        assertEquals(synapse, neuron.getIncomingSynapse(0));
+
+        Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
+        assertEquals(synapse, incomingSynapseIterator.next());
+
     }
 
     @Test
     public void testRemoveIncomingSynapse () {
-        neuron.removeIncomingSynapse(neuron.getIncomingSynapse(0));
-        assertNull(neuron.getIncomingSynapse(0));
+
+        Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
+        neuron.addIncomingSynapse(synapse);
+
+        Iterator<Synapse> incomingSynapseIterator = neuron.getIncomingSynapseIterator();
+
+        neuron.removeIncomingSynapse(incomingSynapseIterator.next());
+
+        incomingSynapseIterator = neuron.getIncomingSynapseIterator();
+
+        assertFalse(incomingSynapseIterator.hasNext());
     }
 
 
@@ -137,23 +149,33 @@ public class NeuronTest {
      * Test adding / getting / removing outgoing synapses
      */
 
-    @Test
-    public void testGetOutgoingSynapse () {
-        Synapse synapse = neuron.getOutgoingSynapse(0);
-        assertNull(synapse);
-    }
+//    @Test
+//    public void testGetOutgoingSynapse () {
+//        Synapse synapse = neuron.getOutgoingSynapse(0);
+//        assertNull(synapse);
+//    }
 
     @Test
     public void testAddOutgoingSynapse () {
         Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
         neuron.addOutgoingSynapse(synapse);
-        assertEquals(synapse, neuron.getOutgoingSynapse(0));
+
+        Iterator<Synapse> outgoingSynapseIterator = neuron.getOutgoingSynapseIterator();
+
+        assertEquals(synapse, outgoingSynapseIterator.next());
     }
 
     @Test
     public void testRemoveOutgoingSynapse () {
-        neuron.removeOutgoingSynapse(neuron.getOutgoingSynapse(0));
-        assertNull(neuron.getOutgoingSynapse(0));
+        Synapse synapse = new DefaultSynapse(neuron, neuron, 0.1);
+        neuron.addOutgoingSynapse(synapse);
+
+        Iterator<Synapse> outgoingSynapseIterator = neuron.getOutgoingSynapseIterator();
+
+        neuron.removeOutgoingSynapse(outgoingSynapseIterator.next());
+
+        outgoingSynapseIterator = neuron.getOutgoingSynapseIterator();
+        assertFalse(outgoingSynapseIterator.hasNext());
     }
 
 

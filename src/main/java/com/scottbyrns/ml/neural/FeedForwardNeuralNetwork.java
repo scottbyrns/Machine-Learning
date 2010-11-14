@@ -14,6 +14,7 @@ public interface FeedForwardNeuralNetwork {
 
     /**
      * Connect two neurons together and return the connecting synapse.
+     * 
      * @param source
      * @param destination
      * @return The connecting neuron or null if something went wrong.
@@ -73,27 +74,17 @@ public interface FeedForwardNeuralNetwork {
 
     /**
      * Get the output layer of neurons.
+     * 
      * @return output layer
      */
     public NeuronLayer getOutputNeurons();
 
     /**
      * Get a vector of hidden neuron layers
+     * 
      * @return
      */
     public Vector<NeuronLayer> getHiddenLayers();
-
-    /**
-     * Get all of the synapse layers in the network.
-     * @return
-     */
-    public Vector<SynapseLayer> getSynapseLayers ();
-
-    /**
-     * Get all of the neuron layers in the network.
-     * @return
-     */
-    public Vector<NeuronLayer> getNeuronLayers ();
 
 	/**
 	 * Returns the mean squared error for a input-output pair
@@ -139,24 +130,28 @@ public interface FeedForwardNeuralNetwork {
 
     /**
      * Get an iterator for the neuron layers vector.
+     * 
      * @return Iterator
      */
     public Iterator<NeuronLayer> getNeuronLayersIterator ();
 
     /**
      * Get an iterator for the synapse layers vector.
+     * 
      * @return Iterator
      */
     public Iterator<SynapseLayer> getSynapseLayersIterator ();
 
     /**
      * Get an iterator for the hidden neuron layers vector.
+     * 
      * @return Iterator
      */
     public Iterator<NeuronLayer> getHiddenNeuronLayersIterator ();
 
     /**
      * Get an iterator for the output neuron layer vector.
+     * 
      * @return Iterator
      */
     public Iterator<Neuron> getOutputNeuronLayerIterator ();

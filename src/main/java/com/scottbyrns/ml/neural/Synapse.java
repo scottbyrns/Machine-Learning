@@ -12,12 +12,14 @@ public interface Synapse extends Serializable {
     
     /**
      * Set the input neuron of the synapse.
+     *
      * @param neuron input neuron of the synapse
      */
     public void setInputNeuron (Neuron neuron);
 
     /**
      * Get the input neuron of the synapse.
+     *
      * @return input neuron of the synapse
      */
     public Neuron getInputNeuron ();
@@ -25,12 +27,14 @@ public interface Synapse extends Serializable {
 
     /**
      * Set the output neuron of the synapse.
+     *
      * @param neuron output neuron of the synapse
      */
     public void setOutputNeuron (Neuron neuron);
 
     /**
      * Get the output neuron of the synapse.
+     *
      * @return output neuron of the synapse
      */
     public Neuron getOutputNeuron ();
@@ -38,12 +42,14 @@ public interface Synapse extends Serializable {
 
     /**
      * Get the weight of the synapse.
+     *
      * @return weight of the synapse
      */
     public double getWeight ();
 
     /**
      * Set the weight of the synapse.
+     *
      * @param weight of the synapse
      */
     public void setWeight (double weight);
@@ -56,12 +62,14 @@ public interface Synapse extends Serializable {
     
     /**
      * Get the value of the synapse.
+     * 
      * @return value of the synapse
      */
     public double getValue ();
 
     /**
      * Set the value of the synapse.
+     * 
      * @param value of the synapse
      */
     public void setValue (double value);

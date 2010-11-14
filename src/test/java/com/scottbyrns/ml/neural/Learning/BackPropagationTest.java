@@ -39,7 +39,7 @@ public class BackPropagationTest {
         rprop.setPatternSet(patternSet);
         rprop.setLearningStrategy(LearningStrategy.Memorize);
 
-        rprop.start();
+        rprop.startTraining();
         while (rprop.isRunning()) {
             try {
                 Thread.sleep(100);

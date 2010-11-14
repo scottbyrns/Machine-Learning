@@ -15,68 +15,83 @@ public interface NeuronLayer {
 
     /**
      * Get the size of the neuron network in this layer.
-     * @return
+     *
+     * @return size of the neuron network in this layer.
+     * @TODO see if switching to iterators will render this method obsolete.
+     * if so remove it from the public api.
      */
     public int getNetworkSize ();
 
     /**
      * Calculate the neurons output by passing inputs by the activation function.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean calculateOutput ();
 
     /**
      * Forward the values to the next layer.
-     * @return
+     *
+     * @return Boolean indication of operations success.
      */
     public boolean feedForward ();
 
     /**
      * Get the neuron layers input
+     *
      * @return a vector of all the neurons inputs.
      */
     public Vector<Double> getInput ();
     /**
      * Get the neuron layers output
+     *
      * @return a vector of all the neurons outputs.
      */
     public Vector<Double> getOutput ();
 
     /**
      * Reset the layers neurons values.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean resetValues ();
 
     /**
      * Reset the layers neurons weights.
+     *
      * @return Boolean indication of operations success.
      */
     public boolean resetWeights ();
 
     /**
      * Get the neuron at the index specified.
+     *
      * @param index
      * @return
+     *
+     * @TODO remove this method from the public api
      */
     public Neuron getNeuron (int index);
 
     /**
      * Get the count of neurons of the specified type.
-     * @param type
-     * @return
+     * 
+     * @param type of neuron to count.
+     * @return A count of neurons matching the specified type.
      */
     public int getNumberOfNeuronsOfType (NeuronType type);
 
     /**
      * Set the activation function of the whole neural layer
-     * @param activationFunction
+     *
+     * @param activationFunction activation function to use for all neurons in this layer
      * @return Boolean indication of operations success.
      */
     public boolean setActivationFunction (ActivationFunction activationFunction);
 
     /**
      * Get an iterator for the neuron vector.
+     * 
      * @return Iterator
      */
     public Iterator<Neuron> getNeuronsIterator ();

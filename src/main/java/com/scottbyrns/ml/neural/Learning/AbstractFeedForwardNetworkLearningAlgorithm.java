@@ -98,6 +98,13 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     }
 
     /**
+     * Start training the neural network.
+     */
+    public void startTraining () {
+        start();
+    }
+
+    /**
      * Resets the partial derivative field of all synapses.
      *
      * @return Boolean indicating if the operation was successful
@@ -364,6 +371,16 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * Getters / Setters
      */
 
+    
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+
     private void setNetwork(FeedForwardNeuralNetwork network) {
         this.network = network;
     }
@@ -372,7 +389,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     private int getMaximumEpochs() {
         return maximumEpochs;
     }
-
 
     private void setMaximumEpochs(int maximumEpochs) {
         this.maximumEpochs = maximumEpochs;
@@ -398,10 +414,10 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         this.currentEpoch = currentEpoch;
     }
 
+
     private void incrementEpoch() {
         setCurrentEpoch(getCurrentEpoch() + 1);
     }
-
 
     private double getCurrentValidationError() {
         return currentValidationError;
@@ -573,14 +589,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 
     public void setLearningStrategy(LearningStrategy learningStrategy) {
         this.learningStrategy = learningStrategy;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
     }
 
 

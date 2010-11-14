@@ -105,10 +105,16 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 	 */
 	private void adjustWeights()
 	{
-		for (int x = 0; x < (getNetwork().getNeuronLayers().size() - 1); x++)
-		{
-			adjustWeights(getNetwork().getNeuronLayers().get(x));
-		}
+        Iterator<NeuronLayer> neuronLayersIteterator = getNetwork().getNeuronLayersIterator();
+        while (neuronLayersIteterator.hasNext()) {
+            /**
+             * @TODO keep an eye on this, this used to exculde the last layer of the neuron vector
+             * in the network. This may have been to avoid adjusting weights on the outputs.
+             * If this has caused issues then get the next neuron layer and check if the iterator
+             * hasNext after before adjusting the weights.
+             */
+            adjustWeights(neuronLayersIteterator.next());
+        }
 	}
 
 	/**
