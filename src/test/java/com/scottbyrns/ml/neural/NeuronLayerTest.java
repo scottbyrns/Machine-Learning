@@ -11,8 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
 
 /**
  * Created by scott
@@ -46,33 +45,100 @@ public class NeuronLayerTest {
 
     @Test
     public void testCalculateOutput () {
+
+        Iterator<Neuron> neuronIterator = neuralLayer.getNeuronsIterator();
+
+        while (neuronIterator.hasNext()) {
+            neuronIterator.next().setInput(0.123);
+        }
+
         neuralLayer.calculateOutput();
         Vector<Double> output = neuralLayer.getOutput();
-        /**
-         * @TODO Finish this test.
-         */
+
+        Iterator<Double> outputIterator = output.iterator();
+
+        while (outputIterator.hasNext()) {
+            assertEquals(0.123, outputIterator.next(), 0.001);
+        }
+
     }
 
     @Test
     public void testFeedForward () {
-        /**
-         * @TODO Figure out a test for feedforward.
-         */
+
+        Iterator<Neuron> neuronIterator = neuralLayer.getNeuronsIterator();
+
+        Neuron neuron;
+        Synapse synapse;
+
+        while(neuronIterator.hasNext()) {
+            neuron = neuronIterator.next();
+
+            synapse = new DefaultSynapse(neuron, neuron, 0.1);
+            synapse.setValue(1);
+            neuron.addIncomingSynapse(synapse);
+
+            synapse = new DefaultSynapse(neuron, neuron, 0.1);
+            synapse.setValue(1);
+            neuron.addOutgoingSynapse(synapse);
+            neuron.setInput(1);
+            
+        }
+
+        neuralLayer.feedForward();
+
+        neuronIterator = neuralLayer.getNeuronsIterator();
+
+        while(neuronIterator.hasNext()) {
+            neuron = neuronIterator.next();
+            neuron.calculateOutput();
+            assertEquals(1.1, neuron.getOutput(), 0.001);
+        }
+
     }
 
     @Test
     public void testGetOutput () {
-        /**
-         * @TODO write test
-         */
+
+        Vector<Double> neuronOutputVector = neuralLayer.getOutput();
+
+        Iterator<Double> neuronOutputVectorIterator = neuronOutputVector.iterator();
+
+        while (neuronOutputVectorIterator.hasNext()) {
+            assertEquals(0.0, neuronOutputVectorIterator.next(), 0.001);
+        }
     }
 
     @Test
     public void testResetValues () {
-        neuralLayer.getNeuronsIterator().next().setInput(1.234);
+
+        Iterator<Neuron> neuronIterator = neuralLayer.getNeuronsIterator();
+        Neuron neuron;
+
+        while (neuronIterator.hasNext()) {
+            neuron = neuronIterator.next();
+            neuron.setInput(1.234);
+            neuron.setDelta(1.234);
+            neuron.setOutput(1.234);
+        }
+
         neuralLayer.resetValues();
-        assertNotSame(1.234, neuralLayer.getNeuronsIterator().next().getInput());
-        assertEquals(0.0, neuralLayer.getNeuronsIterator().next().getInput(), 0.001);
+
+        neuronIterator = neuralLayer.getNeuronsIterator();
+
+
+        while (neuronIterator.hasNext()) {
+            neuron = neuronIterator.next();
+
+            assertNotSame(1.234, neuron.getInput());
+            assertEquals(0.0, neuron.getInput(), 0.001);
+
+            assertNotSame(1.234, neuron.getDelta());
+            assertEquals(0.0, neuron.getDelta(), 0.001);
+
+            assertNotSame(1.234, neuron.getOutput());
+            assertEquals(0.0, neuron.getOutput(), 0.001);
+        }
     }
 
     @Test
@@ -115,6 +181,13 @@ public class NeuronLayerTest {
         neuralLayer.setActivationFunction(new ActivationFunctionSigmoid());
         double output = neuralLayer.getNeuronsIterator().next().calculateOutput();
         assertEquals(0.7310585786300049, output, 0.000000000001);
+    }
+
+    @Test
+    public void testGetNeuronsIterator () {
+        Iterator<Neuron> neuronIterator = neuralLayer.getNeuronsIterator();
+
+        assertTrue(neuronIterator.hasNext());
     }
 
     @After

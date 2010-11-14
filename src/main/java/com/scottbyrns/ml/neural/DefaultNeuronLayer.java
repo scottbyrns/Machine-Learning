@@ -14,7 +14,7 @@ import java.util.Vector;
  */
 public class DefaultNeuronLayer implements NeuronLayer {
 
-    Vector<Neuron> neurons;
+    private Vector<Neuron> neurons;
 
     public DefaultNeuronLayer(int networkSize, ActivationFunction activationFunction) {
         this(networkSize, activationFunction, 0);
@@ -82,6 +82,12 @@ public class DefaultNeuronLayer implements NeuronLayer {
                     synapse = synapseIterator.next();
                     destinationNeuron = synapse.getOutputNeuron();
                     destinationInput = destinationNeuron.getInput();
+
+                    /**
+                     * @TODO watch to make sure that feedForward works as expected
+                     * I added this line after the fact.
+                     */
+                    neuron.calculateOutput();
 
                     synapse.setValue(neuron.getOutput());
                     destinationInput += synapse.getValue() * synapse.getWeight();
