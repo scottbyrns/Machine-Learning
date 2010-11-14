@@ -5,6 +5,7 @@ import com.scottbyrns.ml.neural.FeedForwardNeuralNetwork;
 import com.scottbyrns.ml.neural.Synapse;
 import com.scottbyrns.ml.neural.SynapseLayer;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 /**
@@ -20,36 +21,50 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
     private double deltaMax;
 
     private static final double	DEFAULT_DELTA_NOUGHT = 0.1;
+
     private static final double	DEFAULT_DELTA_MAX = 50;
     private static final double	DEFAULT_DELTA_MIN = Math.pow(10, -6);
-
     private static final double	DEFAULT_ETA_MINUS = 0.5;
-	private static final double	DEFAULT_ETA_PLUS = 1.2;
 
-
+    private static final double	DEFAULT_ETA_PLUS = 1.2;
     @Override
     protected void trainEpoch(Vector<Pattern> patterns) {
-        for (SynapseLayer synapseLayer : getNetwork().getSynapseLayers()) {
-             for (int i = 0; i < synapseLayer.size(); i += 1) {
-                 getDeltaWeight().put(synapseLayer.getSynapseAtIndex(i), DEFAULT_DELTA_NOUGHT);
-             }
-        }
 
-        if (getCurrentEpoch() >= 0) {
-            for (Pattern pattern : patterns) {
-                getNetwork().feedForward(pattern.getInput());
-                calculateDeltas(pattern.getOutput());
+        Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
+        Iterator<Synapse> synapseIterator;
+        
+        while (synapseLayerIterator.hasNext()) {
+            synapseIterator = synapseLayerIterator.next().getSynapsesIterator();
 
-                for (SynapseLayer synapseLayer : getNetwork().getSynapseLayers()) {
-                     for (int i = 0; i < synapseLayer.size(); i += 1) {
-                         updatePartialDerivative(synapseLayer.getSynapseAtIndex(i));
-                     }
-                }
-
+            while (synapseIterator.hasNext()) {
+                getDeltaWeight().put(synapseIterator.next(), getDefaultDeltaNought());
             }
         }
+
+        Iterator<Pattern> patternIterator = patterns.iterator();
+        Pattern currentPattern;
+        
+        while (patternIterator.hasNext()) {
+            currentPattern = patternIterator.next();
+            
+            getNetwork().feedForward(currentPattern.getInput());
+            calculateDeltas(currentPattern.getOutput());
+
+            synapseLayerIterator = getNetwork().getSynapseLayersIterator();
+
+            while (synapseLayerIterator.hasNext()) {
+                synapseIterator = synapseLayerIterator.next().getSynapsesIterator();
+                
+                while (synapseIterator.hasNext()) {
+                    updatePartialDerivative(synapseIterator.next());
+                }
+            }
+
+        }
+
         updateWeights();
     }
+
 
     public ResilientBackPropagation (FeedForwardNeuralNetwork network, int maximumEpochs, double minimumError) {
         super(network, maximumEpochs, minimumError);
@@ -71,16 +86,25 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
         initializeSynapseDeltas();
     }
 
+    /**
+     * Initialize the synapse deltas.
+     */
     private void initializeSynapseDeltas () {
         setDeltaMax(DEFAULT_DELTA_MAX);
         setDeltaMin(DEFAULT_DELTA_MIN);
         setDeltaNought(DEFAULT_DELTA_NOUGHT);
 
-        for (SynapseLayer synapseLayer : getNetwork().getSynapseLayers()) {
-            for (int i = 0; i < synapseLayer.size(); i += 1) {
-                setWeightUpdate(synapseLayer.getSynapseAtIndex(i), getDeltaNought());
+        Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
+        Iterator<Synapse> synapseIterator;
+
+        while (synapseLayerIterator.hasNext()) {
+            synapseIterator = synapseLayerIterator.next().getSynapsesIterator();
+
+            while (synapseIterator.hasNext()) {
+                setWeightUpdate(synapseIterator.next(), getDeltaNought());
             }
         }
+
     }
 
 	/**
@@ -88,13 +112,19 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
 	 */
 	private void updateWeights() {
 
+        Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
+        Iterator<Synapse> synapseIterator;
         Synapse synapse;
 
-        for (SynapseLayer synapseLayer : getNetwork().getSynapseLayers()) {
-             for (int i = 0; i < synapseLayer.size(); i += 1) {
+        while (synapseLayerIterator.hasNext()) {
+            synapseIterator = synapseLayerIterator.next().getSynapsesIterator();
 
-                synapse = synapseLayer.getSynapseAtIndex(i);
+            while (synapseIterator.hasNext()) {
+                synapse = synapseIterator.next();
 
+                /**
+                 * @TODO refactor this SHIT
+                 */
                 double u_delta_weight = getDeltaWeight().get(synapse);
                 double u_error_partial_derivative = getErrorPartialDerivative().get(synapse);
                 double u_old_error_partial_derivative = getOldErrorPartialDerivative().get(synapse);
@@ -117,11 +147,10 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
                     synapse.setWeight(synapse.getValue() + getWeightUpdate().get(synapse));
                     getOldErrorPartialDerivative().put(synapse, (u_error_partial_derivative));
                 }
-
-             }
+            }
         }
-    }
 
+    }
 
 	/**
 	 * Updates the partial derivative for the specified synapse
@@ -133,6 +162,7 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
 		double derivativeUpdate = calculateErrorPartialDerivative(synapse);
 		getErrorPartialDerivative().put(synapse, derivative + derivativeUpdate);
 	}
+
 
 	/**
 	 * Indicates if the partial derivative changed sign in relation to the
@@ -194,5 +224,9 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
 
     private void setDeltaMax(double deltaMax) {
         this.deltaMax = deltaMax;
+    }
+
+    private static double getDefaultDeltaNought() {
+        return DEFAULT_DELTA_NOUGHT;
     }
 }

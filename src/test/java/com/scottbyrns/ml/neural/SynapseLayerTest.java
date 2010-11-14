@@ -5,7 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Iterator;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by scott
@@ -26,20 +29,24 @@ public class SynapseLayerTest {
     }
 
     @Test
-    public void testGetSynapseAtIndex () {
-        assertNull(synapseLayer.getSynapseAtIndex(0));
+    public void testGetSynapseIterator () {
+        Iterator<Synapse> synapseIterator = synapseLayer.getSynapsesIterator();
+        assertNotNull(synapseIterator);
     }
 
     @Test
     public void testAdd () {
-        synapseLayer.add(synapse);
-        assertEquals(synapse, synapseLayer.getSynapseAtIndex(0));
+        synapseLayer.addSynapse(synapse);
+        Iterator<Synapse> synapseIterator = synapseLayer.getSynapsesIterator();
+        assertTrue(synapseIterator.hasNext());
     }
 
 
     @After
     public void teardown () {
-
+        neuron = null;
+        synapse = null;
+        synapseLayer = null;
     }    
 
 }

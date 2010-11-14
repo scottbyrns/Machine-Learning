@@ -18,24 +18,10 @@ public class DefaultSynapseLayer implements SynapseLayer {
 
     /**
      * Add a synapse to the layer.
-     * @param synapse synapse to add
+     * @param synapse synapse to addSynapse
      */
-    public void add(Synapse synapse) {
+    public void addSynapse(Synapse synapse) {
         getSynapses().add(synapse);
-    }
-
-    /**
-     * Get the synapse at the specified index.
-     * @param index
-     * @return The synapse at the specified index or null if the index is out of bounds.
-     */
-    public Synapse getSynapseAtIndex(int index) {
-        try {
-            return getSynapses().get(index);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            return null;
-        }
     }
 
     /**
@@ -54,15 +40,6 @@ public class DefaultSynapseLayer implements SynapseLayer {
         catch (RuntimeException e) {
             return null;
         }
-    }
-
-
-    /**
-     * Get the size of the synapse vector in this layer.
-     * @return size of the synapse vector.
-     */
-    public int size() {
-        return getSynapses().size();
     }
 
     /**
@@ -87,5 +64,18 @@ public class DefaultSynapseLayer implements SynapseLayer {
      */
     public Iterator<Synapse> getSynapsesIterator () {
         return getSynapses().iterator();
+    }
+
+    /**
+     * Set the weights of the synapses in this layer to the next values
+     * of the provided weightVectorIterator
+     * @param weightVectorIterator
+     */
+    public void setWeightVector (Iterator<Double> weightVectorIterator) {
+        Iterator<Synapse> synapseIterator = getSynapsesIterator();
+
+        while (synapseIterator.hasNext() && weightVectorIterator.hasNext()) {
+            synapseIterator.next().setWeight(weightVectorIterator.next());
+        }
     }
 }

@@ -140,14 +140,15 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     /**
      * Set the weights in the network to the values of the provided vector.
      *
-     * @param weightVector
+     * @param weightVector Vector of doubles to populate the synapses.
      */
     public void setWeightVector (Vector<Double> weightVector) {
-        int offset = 0;
-        for (SynapseLayer synapseLayer : getSynapseLayers()) {
-            for (int i = 0; i < synapseLayer.size(); i += 1) {
-                synapseLayer.getSynapseAtIndex(i).setWeight(weightVector.get(offset++));
-            }
+        
+        Iterator<SynapseLayer> synapseLayerIterator = getSynapseLayers().iterator();
+        Iterator<Double> weightVectorIterator = weightVector.iterator();
+        
+        while (synapseLayerIterator.hasNext()) {
+            synapseLayerIterator.next().setWeightVector(weightVectorIterator);
         }
     }
 
@@ -346,7 +347,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 					if (getNeuronLayers().get(destination).getNeuron(iter2).getNeuronType() == NeuronType.Normal) {
 						Neuron destination_neuron = getNeuronLayers().get(destination).getNeuron(iter2);
 						Synapse synapse = connectNeurons(neuron, destination_neuron);
-						synapseLayer.add(synapse);
+						synapseLayer.addSynapse(synapse);
 					}
 				}
 			}
