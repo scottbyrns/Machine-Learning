@@ -3,13 +3,17 @@ package com.scottbyrns.ml.datasets;
 import com.scottbyrns.ml.helpers.IntervalScaler;
 
 import java.io.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 8:38:20 PM
+ *
+ * @version 1.0
+ * @TODO java doc and clean up
  */
 public class DefaultPatternSet implements PatternSet {
 
@@ -21,14 +25,14 @@ public class DefaultPatternSet implements PatternSet {
 
     private double trainingSetPercentage, validationSetPercentage, testSetPercentage;
 
-    private Vector<Pattern> patterns, trainingSet, validationSet, testSet;
+    private List<Pattern> patterns, trainingSet, validationSet, testSet;
 
     public DefaultPatternSet() {
 
-        setPatterns(new Vector<Pattern>());
-        setTrainingSet(new Vector<Pattern>());
-        setValidationSet(new Vector<Pattern>());
-        setTestSet(new Vector<Pattern>());
+        setPatterns(new ArrayList<Pattern>());
+        setTrainingSet(new ArrayList<Pattern>());
+        setValidationSet(new ArrayList<Pattern>());
+        setTestSet(new ArrayList<Pattern>());
 
         setInputInterval(new IntervalScaler(0, 1));
         setOutputInterval(new IntervalScaler(0, 1));
@@ -137,38 +141,38 @@ public class DefaultPatternSet implements PatternSet {
         return (int) (percentage * getPatterns().size());
     }
 
-    private Vector<Pattern> getPatterns() {
+    private List<Pattern> getPatterns() {
         return patterns;
     }
 
-    private void setPatterns(Vector<Pattern> patterns) {
+    private void setPatterns(List<Pattern> patterns) {
         this.patterns = patterns;
     }
 
-    public Vector<Pattern> getTrainingSet() {
+    public List<Pattern> getTrainingSet() {
         generateSets();
         return trainingSet;
     }
 
-    private void setTrainingSet(Vector<Pattern> trainingSet) {
+    private void setTrainingSet(List<Pattern> trainingSet) {
         this.trainingSet = trainingSet;
     }
 
-    public Vector<Pattern> getValidationSet() {
+    public List<Pattern> getValidationSet() {
         generateSets();
         return validationSet;
     }
 
-    private void setValidationSet(Vector<Pattern> validationSet) {
+    private void setValidationSet(List<Pattern> validationSet) {
         this.validationSet = validationSet;
     }
 
-    public Vector<Pattern> getTestSet() {
+    public List<Pattern> getTestSet() {
         generateSets();
         return testSet;
     }
 
-    private void setTestSet(Vector<Pattern> testSet) {
+    private void setTestSet(List<Pattern> testSet) {
         this.testSet = testSet;
     }
 
@@ -203,6 +207,9 @@ public class DefaultPatternSet implements PatternSet {
 	public int loadPatterns(String path, int input_size, String splitToken) {
         try
         {
+            /**
+             * @TODO refactor
+             */
             BufferedReader leitor = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
             String line;
             while ((line = leitor.readLine()) != null)
@@ -237,7 +244,7 @@ public class DefaultPatternSet implements PatternSet {
         }
 	}
 
-    public Vector<Pattern> getShrunkPatterns (PatternType patternType) {
+    public List<Pattern> getShrunkPatterns (PatternType patternType) {
         if (patternType == PatternType.All) {
             return getPatterns();
         }

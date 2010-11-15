@@ -2,26 +2,26 @@ package com.scottbyrns.ml.neural;
 
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
 
 /**
  * Representation of a layer of neurons.
- * 
+ *
  * Created by scott
  * Date: Nov 11, 2010
  * Time: 11:37:24 AM
  */
 public class DefaultNeuronLayer implements NeuronLayer {
 
-    private Vector<Neuron> neurons;
+    private ArrayList<Neuron> neurons;
 
     public DefaultNeuronLayer(int networkSize, ActivationFunction activationFunction) {
         this(networkSize, activationFunction, 0);
     }
 
     public DefaultNeuronLayer(int networkSize, ActivationFunction activationFunction, int biasCount) {
-        setNeurons(new Vector<Neuron>());
+        setNeurons(new ArrayList<Neuron>());
         Neuron neuron;
         for (int i = 0; i < networkSize; i += 1) {
 
@@ -107,9 +107,9 @@ public class DefaultNeuronLayer implements NeuronLayer {
      *
      * @return a vector of all the neurons outputs.
      */
-    public Vector<Double> getOutput() {
+    public ArrayList<Double> getOutput() {
 
-        Vector<Double> output = new Vector<Double>();
+        ArrayList<Double> output = new ArrayList<Double>();
 
         Iterator<Neuron> neuronIterator = getNeuronsIterator();
 
@@ -128,11 +128,11 @@ public class DefaultNeuronLayer implements NeuronLayer {
     public boolean resetValues() {
         try {
             Iterator<Neuron> neuronIterator = getNeuronsIterator();
-            
+
             while (neuronIterator.hasNext()) {
                 neuronIterator.next().resetValues();
             }
-            
+
             return true;
         }
         catch (RuntimeException e) {
@@ -177,7 +177,7 @@ public class DefaultNeuronLayer implements NeuronLayer {
                     count += 1;
                 }
             }
-            
+
             return count;
         }
         catch (RuntimeException e) {
@@ -221,7 +221,7 @@ public class DefaultNeuronLayer implements NeuronLayer {
      *
      * @return neuron vector
      */
-    private Vector<Neuron> getNeurons () {
+    private ArrayList<Neuron> getNeurons () {
         return neurons;
     }
 
@@ -230,7 +230,7 @@ public class DefaultNeuronLayer implements NeuronLayer {
      *
      * @param neurons new neuron vector
      */
-    private void setNeurons (Vector<Neuron> neurons) {
+    private void setNeurons (ArrayList<Neuron> neurons) {
         this.neurons = neurons;
     }
 }

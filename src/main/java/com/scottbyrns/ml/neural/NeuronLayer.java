@@ -3,16 +3,16 @@ package com.scottbyrns.ml.neural;
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Representation of a layer of neurons.
- * Created by scott
+ *
+ * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 11:14:39 AM
  *
- * @TODO Ensure DefaulNeuronLayer.java is sorted and documented the same as this file. Ensure NeuronLayerTest.java
- * tests all methods in the public API.
+ * @version 1.0
  */
 public interface NeuronLayer {
 
@@ -35,7 +35,7 @@ public interface NeuronLayer {
      *
      * @return a vector of all the neurons outputs.
      */
-    public Vector<Double> getOutput ();
+    public List<Double> getOutput ();
 
     /**
      * Reset the layers neurons values.

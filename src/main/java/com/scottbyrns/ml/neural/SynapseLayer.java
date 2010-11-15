@@ -1,7 +1,7 @@
 package com.scottbyrns.ml.neural;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Weight Matrix.
@@ -33,7 +33,7 @@ public interface SynapseLayer {
      *
      * @return Vector of weight values, null in case of error.
      */
-    public Vector<Double> getWeightVector();
+    public List<Double> getWeightVector();
 
     /**
      * Set the weights of the synapses in this layer to the next values

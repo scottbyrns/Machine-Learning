@@ -7,7 +7,7 @@ import com.scottbyrns.ml.neural.NeuronLayer;
 import com.scottbyrns.ml.neural.Synapse;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Implementation of a Back Propagation training algorithm.
@@ -91,7 +91,10 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
      * @param patterns The list of patterns the network is going to be trained with
      */
     @Override
-    protected void trainEpoch(Vector<Pattern> patterns) {
+    protected void trainEpoch(List<Pattern> patterns) {
+        /**
+         * @TODO use iterator
+         */
         for (Pattern pattern : patterns) {
             getNetwork().feedForward(pattern.getInput());
             calculateDeltas(pattern.getOutput());

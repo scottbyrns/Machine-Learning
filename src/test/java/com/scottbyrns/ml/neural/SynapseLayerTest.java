@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import static org.junit.Assert.*;
@@ -46,7 +47,7 @@ public class SynapseLayerTest {
         synapseLayer.addSynapse(synapse);
         synapseLayer.addSynapse(synapse);
 
-        Vector<Double> weightVector = synapseLayer.getWeightVector();
+        List<Double> weightVector = synapseLayer.getWeightVector();
 
         Iterator<Double> weightVectorIterator = weightVector.iterator();
         while (weightVectorIterator.hasNext()) {
@@ -65,7 +66,7 @@ public class SynapseLayerTest {
 
         synapseLayer.setWeightVector(newWeightVector.iterator());
 
-        Vector<Double> weightVector = synapseLayer.getWeightVector();
+        List<Double> weightVector = synapseLayer.getWeightVector();
 
         Iterator<Double> weightVectorIterator = weightVector.iterator();
         while (weightVectorIterator.hasNext()) {

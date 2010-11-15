@@ -2,12 +2,15 @@ package com.scottbyrns.ml.datasets;
 
 import com.scottbyrns.ml.helpers.IntervalScaler;
 
-import java.util.Vector;
+import java.util.List;
 
 /**
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 8:37:42 PM
+ *
+ * @version 1.0
+ * @TODO finish java docs
  */
 public interface PatternSet {
 
@@ -58,9 +61,9 @@ public interface PatternSet {
      */
     public void addPattern (Pattern pattern);
 
-    public Vector<Pattern> getTrainingSet();
-    public Vector<Pattern> getValidationSet();
-    public Vector<Pattern> getTestSet();
+    public List<Pattern> getTrainingSet();
+    public List<Pattern> getValidationSet();
+    public List<Pattern> getTestSet();
 
 	/**
 	 * Loads a pattern set from a file
@@ -72,7 +75,7 @@ public interface PatternSet {
 	 */
 	public int loadPatterns(String path, int input_size, String splitToken);
 
-    public Vector<Pattern> getShrunkPatterns (PatternType patternType);
+    public List<Pattern> getShrunkPatterns (PatternType patternType);
 
     public IntervalScaler getInputInterval();
     public IntervalScaler getOutputInterval();

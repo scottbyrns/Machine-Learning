@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Vector;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +29,7 @@ public class PatternSetTest {
             patternSet.addPattern(new DefaultPattern(new double[]{1.0, 2.0, 3.0, 4.0, 5.0, 6.0}));
         }
 
-        Vector<Pattern> a = patternSet.getTrainingSet();
+        List<Pattern> a = patternSet.getTrainingSet();
         
         assertEquals(60, patternSet.getTrainingSet().size());
         assertEquals(30, patternSet.getValidationSet().size());

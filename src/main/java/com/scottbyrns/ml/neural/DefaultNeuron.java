@@ -141,7 +141,7 @@ public class DefaultNeuron implements Neuron {
     /**
      * Get an iterator for the incoming synapse vector.
      *
-     * @return
+     * @return iterator for the incoming synapse vector
      */
     public Iterator<Synapse> getIncomingSynapseIterator() {
         return incomingSynapses.iterator();

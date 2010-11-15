@@ -7,9 +7,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 2:02:16 PM
+ *
+ * @version 1.0
  */
 public class FeedForwardNeuralNetworkTest {
 

@@ -1,7 +1,8 @@
 package com.scottbyrns.ml.neural;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Weight Matrix.
@@ -14,10 +15,10 @@ import java.util.Vector;
  */
 public class DefaultSynapseLayer implements SynapseLayer {
 
-    private Vector<Synapse> synapses;
+    private List<Synapse> synapses;
 
     public DefaultSynapseLayer() {
-        setSynapses(new Vector<Synapse>());
+        setSynapses(new ArrayList<Synapse>());
     }
 
     /**
@@ -43,9 +44,9 @@ public class DefaultSynapseLayer implements SynapseLayer {
      *
      * @return Vector of weight values, null in case of error.
      */
-    public Vector<Double> getWeightVector() {
+    public List<Double> getWeightVector() {
         try {
-			Vector<Double> list = new Vector<Double>();
+			List<Double> list = new ArrayList<Double>();
             Iterator<Synapse> synapseIterator = getSynapsesIterator();
 
             while (synapseIterator.hasNext()) {
@@ -78,7 +79,7 @@ public class DefaultSynapseLayer implements SynapseLayer {
      *
      * @return synapse vector
      */
-    private Vector<Synapse> getSynapses() {
+    private List<Synapse> getSynapses() {
         return synapses;
     }
 
@@ -87,7 +88,7 @@ public class DefaultSynapseLayer implements SynapseLayer {
      *
      * @param synapses new synapse vector.
      */
-    private void setSynapses(Vector<Synapse> synapses) {
+    private void setSynapses(List<Synapse> synapses) {
         this.synapses = synapses;
     }
 }

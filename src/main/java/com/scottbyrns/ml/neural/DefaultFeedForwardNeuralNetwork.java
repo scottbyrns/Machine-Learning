@@ -5,12 +5,13 @@ import com.scottbyrns.ml.datasets.Pattern;
 import com.scottbyrns.ml.neural.Activation.ActivationFunction;
 import com.scottbyrns.ml.neural.Activation.ActivationFunctionSigmoid;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Default implementation of the FeedForwardNeuralNetwork interface.
- * 
+ *
  * @author Scott Byrns
  * Date: Nov 11, 2010
  * Time: 2:10:48 PM
@@ -21,12 +22,12 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
     public static final int DEFAULT_NUMBER_BIAS_NEURONS = 1;
 
-    private Vector<NeuronLayer> neuronLayers;
-    private Vector<SynapseLayer> synapseLayers;
+    private List<NeuronLayer> neuronLayers;
+    private List<SynapseLayer> synapseLayers;
 
     /**
      * Create an instance of a DefaultFeedForwardNeuralNetwork from an existing FeedForwardNeuralNetwork
-     * 
+     *
      * @param feedForwardNeuralNetwork neural network to copy.
      */
     public DefaultFeedForwardNeuralNetwork(FeedForwardNeuralNetwork feedForwardNeuralNetwork) {
@@ -40,7 +41,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
     /**
      * Create a new DefaultFeedForwardNeuralNetwork
-     * 
+     *
      * @param inputSize number of inputs
      * @param hiddenSizes array of hidden layer neuron counts
      * @param outputSize number of outputs
@@ -62,7 +63,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
             // Create the layers
 			int bias_nodes_per_layer = DefaultFeedForwardNeuralNetwork.DEFAULT_NUMBER_BIAS_NEURONS;
-			setNeuronLayers(new Vector<NeuronLayer>());
+			setNeuronLayers(new ArrayList<NeuronLayer>());
 			getNeuronLayers().add(new DefaultNeuronLayer(inputSize, activationFunction, bias_nodes_per_layer));
 
             for (int x = 0; x < hiddenSizes.length; x++) {
@@ -71,7 +72,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
 			getNeuronLayers().add(new DefaultNeuronLayer(outputSize, activationFunction));
 			// Connect the layers
-			setSynapseLayers(new Vector<SynapseLayer>());
+			setSynapseLayers(new ArrayList<SynapseLayer>());
 			for (int x = 0; x < getNeuronLayers().size() - 1; x++) {
                 connectLayers(x, x + 1);
             }
@@ -113,7 +114,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @param input The network's input
      * @return Returns the network's output, or null in case of error
      */
-    public Vector<Double> feedForward(Vector<Double> input) {
+    public List<Double> feedForward(List<Double> input) {
         try {
             resetValues();
             feedForwardInputLayer(input);
@@ -150,7 +151,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @return Number of neurons in the hidden layers
      */
     public int[] getNumberNeuronsHidden(NeuronType neuronType) {
-        
+
         int[] hidden = new int[getNeuronLayers().size() - 2];
         for (int x = 1; x < getNeuronLayers().size() - 1; x++) {
             hidden[x - 1] = getNeuronLayers().get(x).getNumberOfNeuronsOfType(neuronType);
@@ -231,7 +232,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @return The predicted pattern for the given input, or null in case of
      *         error
      */
-    public Vector<Double> getPrediction(Vector<Double> input) {
+    public List<Double> getPrediction(List<Double> input) {
         feedForward(input);
         return getOutput();
     }
@@ -245,7 +246,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @return The mean squared error for the input-output pair, or -1.0 in case
      *         of error
      */
-    public double getPredictionError(Vector<Double> input, Vector<Double> output) {
+    public double getPredictionError(List<Double> input, List<Double> output) {
         try {
             feedForward(input);
             return meanSquaredError(output);
@@ -262,7 +263,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @return The mean squared error for the set of input-output pairs, or -1.0
      *         in case of error
      */
-    public double getPredictionError(Vector<Pattern> patterns) {
+    public double getPredictionError(List<Pattern> patterns) {
         try {
             double error = 0;
 
@@ -271,7 +272,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
             while (patternIterator.hasNext()) {
                 pattern = patternIterator.next();
-                
+
                 error += getPredictionError(pattern.getInput(), pattern.getOutput());
             }
 
@@ -286,17 +287,18 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     /**
      * Gets a vector of weights contained in the neural network
      *
-     * @return Vector of weight values
+     * @return ArrayList of weight values
      * @TODO see if this can be deprecated in favor of an iterator
      */
-    public Vector<Double> getWeightVector() {
-        Vector<Double> list = new Vector<Double>();
+    public List<Double> getWeightVector() {
+        List<Double> list = new ArrayList<Double>();
 
         Iterator<SynapseLayer> synapseLayerIterator = getSynapseLayersIterator();
         Iterator<Double> doubleIterator;
 
         while (synapseLayerIterator.hasNext()) {
             doubleIterator = synapseLayerIterator.next().getWeightVector().iterator();
+            
             while (doubleIterator.hasNext()) {
                 list.add(doubleIterator.next());
             }
@@ -308,15 +310,15 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
     /**
      * Set the weights in the network to the values of the provided vector.
      *
-     * @param weightVector to replace current weight vector
+     * @param weightArrayList to replace current weight vector
      */
-    public void setWeightVector (Vector<Double> weightVector) {
+    public void setWeightVector (List<Double> weightArrayList) {
 
         Iterator<SynapseLayer> synapseLayerIterator = getSynapseLayers().iterator();
-        Iterator<Double> weightVectorIterator = weightVector.iterator();
+        Iterator<Double> weightArrayListIterator = weightArrayList.iterator();
 
         while (synapseLayerIterator.hasNext()) {
-            synapseLayerIterator.next().setWeightVector(weightVectorIterator);
+            synapseLayerIterator.next().setWeightVector(weightArrayListIterator);
         }
     }
 
@@ -326,8 +328,8 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 *
 	 * @return Returns an array of doubles with the network's output
 	 */
-	private Vector<Double> getOutput() {
-		Vector<Double> output = new Vector<Double>();
+	private List<Double> getOutput() {
+		List<Double> output = new ArrayList<Double>();
 
         Iterator<Neuron> outputNeuronLayerIterator = getOutputNeuronLayerIterator();
 
@@ -346,7 +348,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
 
 
-    
+
 
     /**
      * Returns the current error for the a vector of patterns
@@ -356,7 +358,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      * @param patterns The list of patterns that will be tested
      * @return The mean squared error for the list of patterns, or -1.0 in case of error
      */
-    private double measurePatternListError(Vector<Pattern> patterns) {
+    private double measurePatternListError(List<Pattern> patterns) {
         try {
             double error = 0;
 			int count = 0;
@@ -383,7 +385,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 * @param output Desired output
 	 * @return Returns the mean squared error, or -1.0 in case of error
 	 */
-    private double meanSquaredError(Vector<Double> output) {
+    private double meanSquaredError(List<Double> output) {
         try {
 			double sum = 0;
 
@@ -414,14 +416,14 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 	 * @param input The vector of inputs to the network.
 	 * @return Boolean indicating if the operation has succeeded
 	 */
-    protected boolean feedForwardInputLayer(Vector<Double> input) {
+    protected boolean feedForwardInputLayer(List<Double> input) {
         try {
 
             NeuronLayer inputLayer = getNeuronLayersIterator().next();
 
             int numberOfBiasNodes = inputLayer.getNumberOfNeuronsOfType(NeuronType.Bias);
 
-            Vector<Double> paddedInput = new Vector<Double>(input);
+            List<Double> paddedInput = new ArrayList<Double>(input);
             for (int i = 0; i < numberOfBiasNodes; i += 1) {
                 paddedInput.add(1.0);
             }
@@ -478,7 +480,7 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
             }
 
 			getSynapseLayers().add(synapseLayer);
-            
+
 			return true;
 		}
         catch (RuntimeException e) {
@@ -491,8 +493,8 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
      *
      * @return hidden neurons layers
      */
-    private Vector<NeuronLayer> getHiddenLayers() {
-        Vector<NeuronLayer> hiddenLayers = new Vector<NeuronLayer>();
+    private List<NeuronLayer> getHiddenLayers() {
+        List<NeuronLayer> hiddenLayers = new ArrayList<NeuronLayer>();
         /**
          * @TODO use an iterator
          */
@@ -514,37 +516,37 @@ public class DefaultFeedForwardNeuralNetwork implements FeedForwardNeuralNetwork
 
     /**
      * Get all of the neuron layers in the network.
-     * 
+     *
      * @return neuron layer vector
      */
-    private Vector<NeuronLayer> getNeuronLayers() {
+    private List<NeuronLayer> getNeuronLayers() {
         return neuronLayers;
     }
 
     /**
      * Set the neuron layer vector to the provided input.
-     * 
+     *
      * @param neuronLayers vector to set as current neuron layers
      */
-    private void setNeuronLayers(Vector<NeuronLayer> neuronLayers) {
+    private void setNeuronLayers(List<NeuronLayer> neuronLayers) {
         this.neuronLayers = neuronLayers;
     }
 
     /**
      * Get all of the synapse layers in the network.
-     * 
+     *
      * @return synapse layer vector
      */
-    private Vector<SynapseLayer> getSynapseLayers() {
+    private List<SynapseLayer> getSynapseLayers() {
         return synapseLayers;
     }
 
     /**
      * Set the synapse layer vector to the provided input.
-     * 
+     *
      * @param synapseLayers vector to set as current synapse layers.
      */
-    private void setSynapseLayers(Vector<SynapseLayer> synapseLayers) {
+    private void setSynapseLayers(List<SynapseLayer> synapseLayers) {
         this.synapseLayers = synapseLayers;
     }
 }

@@ -5,7 +5,7 @@ import com.scottbyrns.ml.datasets.PatternSet;
 import com.scottbyrns.ml.datasets.PatternType;
 import com.scottbyrns.ml.neural.FeedForwardNeuralNetwork;
 
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Created by scott
@@ -26,8 +26,8 @@ public class StringTester
 		String output_text = "";
 		for (Pattern pattern : pattern_set.getShrunkPatterns(PatternType.All))
 		{
-			Vector<Double> input = pattern.getInput();
-			Vector<Double> output = this.network.getPrediction(input);
+			List<Double> input = pattern.getInput();
+			List<Double> output = this.network.getPrediction(input);
 			for (Double value : input)
 				output_text += pattern_set.getInputInterval().unshrink(value.doubleValue()) + " ";
 			output_text += "= ";

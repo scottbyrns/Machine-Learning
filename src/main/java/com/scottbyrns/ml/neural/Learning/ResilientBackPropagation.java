@@ -6,12 +6,14 @@ import com.scottbyrns.ml.neural.Synapse;
 import com.scottbyrns.ml.neural.SynapseLayer;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
- * Created by scott
+ * @author Scott Byrns
  * Date: Nov 12, 2010
  * Time: 4:03:08 PM
+ *
+ * @version 1.0
  */
 public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm {
 
@@ -28,7 +30,7 @@ public class ResilientBackPropagation extends AbstractFeedForwardNetworkLearning
 
     private static final double	DEFAULT_ETA_PLUS = 1.2;
     @Override
-    protected void trainEpoch(Vector<Pattern> patterns) {
+    protected void trainEpoch(List<Pattern> patterns) {
 
         Iterator<SynapseLayer> synapseLayerIterator = getNetwork().getSynapseLayersIterator();
         Iterator<Synapse> synapseIterator;

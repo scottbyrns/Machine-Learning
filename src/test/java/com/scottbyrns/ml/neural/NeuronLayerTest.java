@@ -9,7 +9,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import static org.junit.Assert.*;
 
@@ -53,7 +52,7 @@ public class NeuronLayerTest {
         }
 
         neuralLayer.calculateOutput();
-        Vector<Double> output = neuralLayer.getOutput();
+        List<Double> output = neuralLayer.getOutput();
 
         Iterator<Double> outputIterator = output.iterator();
 
@@ -100,7 +99,7 @@ public class NeuronLayerTest {
     @Test
     public void testGetOutput () {
 
-        Vector<Double> neuronOutputVector = neuralLayer.getOutput();
+        List<Double> neuronOutputVector = neuralLayer.getOutput();
 
         Iterator<Double> neuronOutputVectorIterator = neuronOutputVector.iterator();
 

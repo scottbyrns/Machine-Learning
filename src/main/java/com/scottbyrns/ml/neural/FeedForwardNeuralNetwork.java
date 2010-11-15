@@ -3,7 +3,7 @@ package com.scottbyrns.ml.neural;
 import com.scottbyrns.ml.datasets.Pattern;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Feedforward neural network
@@ -27,7 +27,7 @@ public interface FeedForwardNeuralNetwork {
 
     /**
      * Connect two neurons together and return the connecting synapse.
-     * 
+     *
      * @param source neuron
      * @param destination neuron
      * @return The connecting neuron or null if something went wrong.
@@ -41,7 +41,7 @@ public interface FeedForwardNeuralNetwork {
 	 * @param input The network's input
 	 * @return Returns the network's output, or null in case of error
 	 */
-	public Vector<Double> feedForward(Vector<Double> input);
+	public List<Double> feedForward(List<Double> input);
 
 	/**
 	 * Returns the number of neurons in the hidden layers
@@ -61,12 +61,12 @@ public interface FeedForwardNeuralNetwork {
 
     /**
      * Get the number of output neurons in the network matching the NeuronType specified.
-     * 
+     *
      * @param neuronType of neuron (use constants in class DefaultNeuron)
      * @return Number of neurons in the output layer
      */
     public int getNumberNeuronsOutput(NeuronType neuronType);
-    
+
     /**
      * Get an iterator for the output neuron layer vector.
      *
@@ -102,7 +102,7 @@ public interface FeedForwardNeuralNetwork {
      * @return The predicted pattern for the given input, or null in case of
      *         error
      */
-    public Vector<Double> getPrediction(Vector<Double> input);
+    public List<Double> getPrediction(List<Double> input);
 
 	/**
 	 * Returns the mean squared error for a input-output pair
@@ -113,7 +113,7 @@ public interface FeedForwardNeuralNetwork {
 	 * @return The mean squared error for the input-output pair, or -1.0 in case
 	 *         of error
 	 */
-	public double getPredictionError(Vector<Double> input, Vector<Double> output);
+	public double getPredictionError(List<Double> input, List<Double> output);
 
 	/**
 	 * Returns the mean squared error for a set of input-output pairs
@@ -122,20 +122,20 @@ public interface FeedForwardNeuralNetwork {
 	 * @return The mean squared error for the set of input-output pairs, or -1.0
 	 *         in case of error
 	 */
-	public double getPredictionError(Vector<Pattern> patterns);
+	public double getPredictionError(List<Pattern> patterns);
 
 	/**
 	 * Gets a vector of weights contained in the neural network
 	 *
-	 * @return Vector of weight values
+	 * @return List of weight values
      * @TODO see if this can be deprecated in favor of an iterator
 	 */
-	public Vector<Double> getWeightVector();
+	public List<Double> getWeightVector();
 
     /**
      * Set the weights in the network to the values of the provided vector.
      *
-     * @param weightVector to replace current weight vector
+     * @param weightList to replace current weight vector
      */
-    public void setWeightVector (Vector<Double> weightVector);
+    public void setWeightVector (List<Double> weightList);
 }

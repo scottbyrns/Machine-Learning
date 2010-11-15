@@ -7,7 +7,7 @@ import com.scottbyrns.ml.neural.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * Partial implementation of a FeedForwardNeuralNetwork training algorithm.
@@ -39,9 +39,9 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     private double minimumValidationError = Double.MAX_VALUE;
     private double minimumTrainingError = Double.MAX_VALUE - 1;
 
-    private Vector<Double> minimumValidationErrorWeights;
+    private List<Double> minimumValidationErrorWeights;
 
-    private Vector<Double> minimumTrainingErrorWeights;
+    private List<Double> minimumTrainingErrorWeights;
 
 
     private HashMap<Synapse, Double> deltaWeight, errorPartialDerivative, oldErrorPartialDerivative;
@@ -211,7 +211,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * @param validationPatterns Validation set
      * @return Boolean indicating if the operation was successful
      */
-    private boolean generalize(Vector<Pattern> trainingPatterns, Vector<Pattern> validationPatterns) {
+    private boolean generalize(List<Pattern> trainingPatterns, List<Pattern> validationPatterns) {
         try {
 
             reset();
@@ -250,7 +250,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * @param patterns Training set
      * @return Boolean indicating if the operation was successful
      */
-    protected boolean memorize(Vector<Pattern> patterns) {
+    protected boolean memorize(List<Pattern> patterns) {
         try {
 
             reset();
@@ -284,7 +284,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * @param output The desired network output
      * @return Boolean indicating if the operation was successful
      */
-    protected boolean calculateDeltas(Vector<Double> output) {
+    protected boolean calculateDeltas(List<Double> output) {
         try {
             calculateOutputLayerDeltas(output);
 
@@ -302,7 +302,9 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     }
 
     /**
-     * @param synapse
+     * 
+     *
+     * @param synapse to calculate the error for.
      * @return the new derivative value. This function assumes that the neruon
      *         delta values (the neuron sensitivities) have already been
      *         updated; that is, that calculateDeltas(output) has already been
@@ -474,7 +476,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * @param output Desired output
      * @return Boolean indicating if the operation was successful
      */
-    private boolean calculateOutputLayerDeltas(Vector<Double> output) {
+    private boolean calculateOutputLayerDeltas(List<Double> output) {
         try {
             Iterator<Neuron> outputLayerIterator = getNetwork().getOutputNeuronLayerIterator();
             Iterator<Double> outputDoubleIterator = output.iterator();
@@ -703,7 +705,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      *
      * @return vector of minimum validation error weights 
      */
-    private Vector<Double> getMinimumValidationErrorWeights() {
+    private List<Double> getMinimumValidationErrorWeights() {
         return minimumValidationErrorWeights;
     }
 
@@ -712,7 +714,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * 
      * @param minimumValidationErrorWeights new minimum validation error weights vector.
      */
-    private void setMinimumValidationErrorWeights(Vector<Double> minimumValidationErrorWeights) {
+    private void setMinimumValidationErrorWeights(List<Double> minimumValidationErrorWeights) {
         this.minimumValidationErrorWeights = minimumValidationErrorWeights;
     }
 
@@ -721,7 +723,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      *
      * @return vector of minimum training error weights.
      */
-    private Vector<Double> getMinimumTrainingErrorWeights() {
+    private List<Double> getMinimumTrainingErrorWeights() {
         return minimumTrainingErrorWeights;
     }
 
@@ -730,7 +732,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      *
      * @param minimumTrainingErrorWeights new minimum training error weights vector.
      */
-    private void setMinimumTrainingErrorWeights(Vector<Double> minimumTrainingErrorWeights) {
+    private void setMinimumTrainingErrorWeights(List<Double> minimumTrainingErrorWeights) {
         this.minimumTrainingErrorWeights = minimumTrainingErrorWeights;
     }
 
@@ -757,7 +759,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      *
      * @param patterns pattern to train during the current epoch
      */
-    private void trainNextEpoch(Vector<Pattern> patterns) {
+    private void trainNextEpoch(List<Pattern> patterns) {
         try {
             trainEpoch(patterns);
         }
@@ -773,6 +775,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
      * @param patterns The list of patterns the network is going to be trained with
      *                 for one epoch
      */
-    protected abstract void trainEpoch(Vector<Pattern> patterns);
+    protected abstract void trainEpoch(List<Pattern> patterns);
 
 }
