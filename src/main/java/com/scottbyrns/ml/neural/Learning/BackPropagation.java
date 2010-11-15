@@ -124,12 +124,13 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
      * 
      * @param neuron to adjust the outgoing synapse weight for.
 	 */
-	private void adjustWeights(Neuron neuron)
-	{
+	private void adjustWeights(Neuron neuron) {
         Iterator<Synapse> synapseIterator = neuron.getOutgoingSynapseIterator();
         Synapse synapse;
+
 		while (synapseIterator.hasNext()) {
             synapse = synapseIterator.next();
+            
 			double weight = synapse.getWeight();
 			double aWeightUpdate = neuron.getOutput() * getLearningRate() * synapse.getOutputNeuron().getDelta() + getMomentumRate() * getOldWeightUpdate(synapse);
 			setWeightUpdate(synapse, aWeightUpdate);

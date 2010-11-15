@@ -36,10 +36,8 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     private double minimumTrainingError = Double.MAX_VALUE - 1;
 
     private Vector<Double> minimumValidationErrorWeights;
-    private double minimumValidationErrorEpoch;
 
     private Vector<Double> minimumTrainingErrorWeights;
-    private double minimumTrainingErrorEpoch;
 
 
     private HashMap<Synapse, Double> deltaWeight, errorPartialDerivative, oldErrorPartialDerivative;
@@ -51,7 +49,8 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
     /**
      * The weight update to perform in each synapse
      */
-    protected HashMap<Synapse, Double> weightUpdate;
+    private HashMap<Synapse, Double> weightUpdate;
+    
     private LearningStrategy learningStrategy = LearningStrategy.Generalization;
 
 
@@ -223,13 +222,11 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
                 if (getCurrentValidationError() < getMinimumValidationError()) {
                     setMinimumValidationErrorWeights(getNetwork().getWeightVector());
                     setMinimumValidationError(getCurrentValidationError());
-                    setMinimumValidationErrorEpoch(getCurrentEpoch());
                 }
 
                 if (getCurrentTrainingError() < getMinimumTrainingError()) {
                     setMinimumTrainingErrorWeights(getNetwork().getWeightVector());
                     setMinimumTrainingError(getCurrentTrainingError());
-                    setMinimumTrainingErrorEpoch(getCurrentEpoch());
                 }
 
             }
@@ -262,7 +259,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
                 if (getCurrentTrainingError() < getMinimumTrainingError()) {
                     setMinimumTrainingErrorWeights(getNetwork().getWeightVector());
                     setMinimumTrainingError(getCurrentTrainingError());
-                    setMinimumTrainingErrorEpoch(getCurrentEpoch());
                 }
 
             }
@@ -336,34 +332,74 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         return getOldWeightUpdate().get(synapse);
     }
 
+    /**
+     * Get the hashmap of weight updates.
+     * 
+     * @return hashmap of weight updates.
+     */
     protected HashMap<Synapse, Double> getWeightUpdate() {
         return weightUpdate;
     }
 
+    /**
+     * Get the hashmap of delta weights.
+     *
+     * @return hashmap of delta weights.
+     */
     protected HashMap<Synapse, Double> getDeltaWeight() {
         return deltaWeight;
     }
 
+    /**
+     * Set the delta weight hashmap to the provided hashmap
+     *
+     * @param deltaWeight hashmap to set as current deltaWeight hashmap.
+     */
     protected void setDeltaWeight(HashMap<Synapse, Double> deltaWeight) {
         this.deltaWeight = deltaWeight;
     }
 
+    /**
+     * Get the error partial derivative hashmap.
+     *
+     * @return error partial derivative hashmap.
+     */
     protected HashMap<Synapse, Double> getErrorPartialDerivative() {
         return errorPartialDerivative;
     }
 
+    /**
+     * Set the error partial derivative hashmap to the provided hashmap
+     *
+     * @param errorPartialDerivative to set as the current errorPartialDerivative hashmap.
+     */
     protected void setErrorPartialDerivative(HashMap<Synapse, Double> errorPartialDerivative) {
         this.errorPartialDerivative = errorPartialDerivative;
     }
 
+    /**
+     * Get the old error partial derivative hashmap.
+     *
+     * @return old error partial derivative hashmap.
+     */
     protected HashMap<Synapse, Double> getOldErrorPartialDerivative() {
         return oldErrorPartialDerivative;
     }
 
+    /**
+     * Set the old error partial derivative hashmap to the provided hashmap.
+     *
+     * @param oldErrorPartialDerivative to set as the current oldErrorPartialDerivative hashmap.
+     */
     protected void setOldErrorPartialDerivative(HashMap<Synapse, Double> oldErrorPartialDerivative) {
         this.oldErrorPartialDerivative = oldErrorPartialDerivative;
     }
 
+    /**
+     * Get the pattern set being used for training.
+     *
+     * @return pattern set used for training.
+     */
     protected PatternSet getPatternSet() {
         return patternSet;
     }
@@ -486,9 +522,7 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 
         setCurrentValidationError(Double.MAX_VALUE);
         setCurrentTrainingError(Double.MAX_VALUE);
-        setMinimumTrainingErrorEpoch(0);
         setMinimumTrainingErrorWeights(null);
-        setMinimumValidationErrorEpoch(0);
         setMinimumValidationError(Double.MAX_VALUE);
         setMinimumValidationErrorWeights(null);
 
@@ -579,91 +613,152 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
         this.minimumError = minimumError;
     }
 
+    /**
+     * Set the current epoch to the provided count.
+     *
+     * @param currentEpoch new epoch.
+     */
     private void setCurrentEpoch(int currentEpoch) {
         this.currentEpoch = currentEpoch;
     }
 
+    /**
+     * Increment the current epoch by one.
+     */
     private void incrementEpoch() {
         setCurrentEpoch(getCurrentEpoch() + 1);
     }
 
+    /**
+     * Get the current validation error value.
+     *
+     * @return current validation error.
+     */
     private double getCurrentValidationError() {
         return currentValidationError;
     }
 
+    /**
+     * Set the current validation error value.
+     *
+     * @param currentValidationError new validation error value.
+     */
     private void setCurrentValidationError(double currentValidationError) {
         this.currentValidationError = currentValidationError;
     }
 
+    /**
+     * Get the current training error value.
+     *
+     * @return current training error.
+     */
     private double getCurrentTrainingError() {
         return currentTrainingError;
     }
 
+    /**
+     * Set the current training error value.
+     *
+     * @param currentTrainingError new training error value.
+     */
     private void setCurrentTrainingError(double currentTrainingError) {
         this.currentTrainingError = currentTrainingError;
     }
 
+    /**
+     * Get the minimum validation error value.
+     *
+     * @return minimum validation error.
+     */
     private double getMinimumValidationError() {
         return minimumValidationError;
     }
 
+    /**
+     * Set the minimum validation error value.
+     *
+     * @param minimumValidationError new minimum validation error value.
+     */
     private void setMinimumValidationError(double minimumValidationError) {
         this.minimumValidationError = minimumValidationError;
     }
 
+    /**
+     * Get the minimum training error value.
+     *
+     * @return minimum training error
+     */
     private double getMinimumTrainingError() {
         return minimumTrainingError;
     }
 
+    /**
+     * Set the minimum training error value.
+     *
+     * @param minimumTrainingError new minimum training error value.
+     */
     private void setMinimumTrainingError(double minimumTrainingError) {
         this.minimumTrainingError = minimumTrainingError;
     }
 
+    /**
+     * Get a vector of minimum validation error weights.
+     *
+     * @return vector of minimum validation error weights 
+     */
     private Vector<Double> getMinimumValidationErrorWeights() {
         return minimumValidationErrorWeights;
     }
 
+    /**
+     * Set the vector of minimum validation error weights to the provided vector.
+     * 
+     * @param minimumValidationErrorWeights new minimum validation error weights vector.
+     */
     private void setMinimumValidationErrorWeights(Vector<Double> minimumValidationErrorWeights) {
         this.minimumValidationErrorWeights = minimumValidationErrorWeights;
     }
 
-    private double getMinimumValidationErrorEpoch() {
-        return minimumValidationErrorEpoch;
-    }
-
-    private void setMinimumValidationErrorEpoch(double minimumValidationErrorEpoch) {
-        this.minimumValidationErrorEpoch = minimumValidationErrorEpoch;
-    }
-
+    /**
+     * Get the vector of minimum training error weights.
+     *
+     * @return vector of minimum training error weights.
+     */
     private Vector<Double> getMinimumTrainingErrorWeights() {
         return minimumTrainingErrorWeights;
     }
 
+    /**
+     * Set the vector of minimum training error weights to the provided vector.
+     *
+     * @param minimumTrainingErrorWeights new minimum training error weights vector.
+     */
     private void setMinimumTrainingErrorWeights(Vector<Double> minimumTrainingErrorWeights) {
         this.minimumTrainingErrorWeights = minimumTrainingErrorWeights;
     }
 
-    private double getMinimumTrainingErrorEpoch() {
-        return minimumTrainingErrorEpoch;
-    }
-
-    private void setMinimumTrainingErrorEpoch(double minimumTrainingErrorEpoch) {
-        this.minimumTrainingErrorEpoch = minimumTrainingErrorEpoch;
-    }
-
+    /**
+     * Set the old weight update hashmap to the provided hashmap.
+     * 
+     * @param oldWeightUpdate hashmap to set as the old weight update hashmap.
+     */
     private void setOldWeightUpdate(HashMap<Synapse, Double> oldWeightUpdate) {
         this.oldWeightUpdate = oldWeightUpdate;
     }
 
+    /**
+     * Set the weight update hashmap to the provided hashmap.
+     *
+     * @param weightUpdate hashmap to set as the weight update hashmap.
+     */
     private void setWeightUpdate(HashMap<Synapse, Double> weightUpdate) {
         this.weightUpdate = weightUpdate;
     }
 
-    
     /**
-     * Wrap train epoch to take care of incrementing the epoch so the implementer doesnt have to.
+     * Wrap train epoch to take care of incrementing the epoch so the implementer does not have to.
      *
-     * @param patterns
+     * @param patterns pattern to train during the current epoch
      */
     private void trainNextEpoch(Vector<Pattern> patterns) {
         try {
