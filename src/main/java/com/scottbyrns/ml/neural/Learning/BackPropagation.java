@@ -10,10 +10,11 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
+ * Implementation of a Back Propagation training algorithm.
+ *
  * @author Scott Byrns
  * Date: Nov 12, 2010
  * Time: 11:57:17 PM
- * @TODO finish javadocs
  *
  * @version 1.0
  */
@@ -32,17 +33,61 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
     /**
 	 * The algorithm's learning rate determines the speed of training
 	 */
-
-	public double learningRate;
+	private double learningRate;
 
 	/**
 	 * The algorithm's learning rate determines the influence of the previous
 	 * update on the current update
 	 */
-	public double momentumRate;
+	private double momentumRate;
 
     /**
-     * 
+     * Create a new instance of the back propagation learning algorithm.
+     *
+     * @param network feed forward neural network to train
+     * @param maximumEpochs maximum number of epochs to train the network for.
+     * @param minimumError minimum training error
+     */
+    public BackPropagation (FeedForwardNeuralNetwork network, int maximumEpochs, double minimumError) {
+        super(network, maximumEpochs, minimumError);
+        initilizeRates();
+    }
+
+    /**
+     * Create a new instance of the back propagation learning algorithm.
+     *
+     * @param network feed forward neural network to train
+     */
+    public BackPropagation (FeedForwardNeuralNetwork network) {
+        super(network);
+        initilizeRates();
+    }
+
+    /**
+     * Create a new instance of the back propagation learning algorithm.
+     *
+     * @param network feed forward neural network to train
+     * @param maximumEpochs maximum number of epochs to train the network for.
+     */
+    public BackPropagation (FeedForwardNeuralNetwork network, int maximumEpochs) {
+        super(network, maximumEpochs);
+        initilizeRates();
+    }
+
+    /**
+     * Create a new instance of the back propagation learning algorithm.
+     *
+     * @param network feed forward neural network to train
+     * @param minimumError minimum training error
+     */
+    public BackPropagation (FeedForwardNeuralNetwork network, double minimumError) {
+        super(network, minimumError);
+        initilizeRates();
+    }
+
+    /**
+     * Train the a vector of patterns to the current epoch.
+     *
      * @param patterns The list of patterns the network is going to be trained with
      */
     @Override
@@ -52,46 +97,6 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
             calculateDeltas(pattern.getOutput());
             adjustWeights();
         }
-    }
-
-    /**
-     *
-     * @param network
-     * @param maximumEpochs
-     * @param minimumError
-     */
-    public BackPropagation (FeedForwardNeuralNetwork network, int maximumEpochs, double minimumError) {
-        super(network, maximumEpochs, minimumError);
-        initilizeRates();
-    }
-
-    /**
-     *
-     * @param network
-     */
-    public BackPropagation (FeedForwardNeuralNetwork network) {
-        super(network);
-        initilizeRates();
-    }
-
-    /**
-     *
-     * @param network
-     * @param maximumEpochs
-     */
-    public BackPropagation (FeedForwardNeuralNetwork network, int maximumEpochs) {
-        super(network, maximumEpochs);
-        initilizeRates();
-    }
-
-    /**
-     * 
-     * @param network
-     * @param minimumError
-     */
-    public BackPropagation (FeedForwardNeuralNetwork network, double minimumError) {
-        super(network, minimumError);
-        initilizeRates();
     }
 
     /**
@@ -105,8 +110,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 	/**
 	 * Adjusts the network's weights
 	 */
-	private void adjustWeights()
-	{
+	private void adjustWeights() {
         Iterator<NeuronLayer> neuronLayersIteterator = getNetwork().getNeuronLayersIterator();
         while (neuronLayersIteterator.hasNext()) {
             /**

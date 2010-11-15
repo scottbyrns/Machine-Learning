@@ -10,13 +10,17 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
+ * Partial implementation of a FeedForwardNeuralNetwork training algorithm.
+ * <br />
+ * This will train the network to produce desired outputs from specified input data.
+ *
  * @author Scott Byrns
  * Date: Nov 12, 2010
  * Time: 11:03:30 AM
  *
  * @version 1.0
  *
- * @TODO clean this shit up & javadoc
+ * @TODO Simplify this class. Javadoc fields.
  */
 public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread implements FeedForwardNetworkLearningAlgorithm {
 
@@ -551,13 +555,6 @@ public abstract class AbstractFeedForwardNetworkLearningAlgorithm extends Thread
 
         resetPartialDerivatives();
     }
-
-
-
-
-    /*
-     * Getters / Setters
-     */
 
     /**
      * Set the running state of the network training.

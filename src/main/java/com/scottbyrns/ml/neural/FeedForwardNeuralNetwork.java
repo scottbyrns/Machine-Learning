@@ -59,7 +59,6 @@ public interface FeedForwardNeuralNetwork {
 	 */
 	public int getNumberNeuronsInput(NeuronType neuronType);
 
-
     /**
      * Get the number of output neurons in the network matching the NeuronType specified.
      * 

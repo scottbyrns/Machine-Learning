@@ -23,6 +23,9 @@ public class FeedForwardNeuralNetworkTest {
 
     @Test
     public void testConnectNeurons () {
+
+
+
         /**
          * @TODO implement
          */
