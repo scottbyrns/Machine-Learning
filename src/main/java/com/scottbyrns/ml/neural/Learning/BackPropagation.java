@@ -121,6 +121,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
 	/**
 	 * Adjusts the weights of the outgoing synapses this neuron feeds data into
+     * 
      * @param neuron to adjust the outgoing synapse weight for.
 	 */
 	private void adjustWeights(Neuron neuron)
@@ -138,6 +139,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
 	/**
 	 * Adjusts the weights of the outgoing synapses
+     *
      * @param neuronLayer of neurons to adjust the outgoing synapse weights for.
 	 */
 	private void adjustWeights(NeuronLayer neuronLayer) {
@@ -150,6 +152,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
     /**
      * Get the learningRate
+     *
      * @return learningRate
      */
     private double getLearningRate() {
@@ -158,6 +161,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
     /**
      * Set the learningRate
+     *
      * @param learningRate new learningRate
      */
     private void setLearningRate(double learningRate) {
@@ -166,6 +170,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
     /**
      * Get the momentumRate
+     *
      * @return momentumRate
      */
     private double getMomentumRate() {
@@ -174,6 +179,7 @@ public class BackPropagation extends AbstractFeedForwardNetworkLearningAlgorithm
 
     /**
      * Set the momentumRate.
+     *
      * @param momentumRate new momentumRate
      */
     private void setMomentumRate(double momentumRate) {
