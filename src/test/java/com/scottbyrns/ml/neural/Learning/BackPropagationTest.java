@@ -43,7 +43,7 @@ public class BackPropagationTest {
         patternSet.addPattern(new DefaultPattern("0;1;0", "1"));
         patternSet.addPattern(new DefaultPattern("1;0;1", "1"));
 
-        rprop.setTargetError(0.001);
+        rprop.setTargetError(0.0001);
         rprop.setPatternSet(patternSet);
         rprop.setLearningStrategy(LearningStrategy.Memorize);
 
@@ -68,7 +68,7 @@ public class BackPropagationTest {
 		System.out.println(output);
     }
 
-    @Test
+//    @Test
     public void testImage () {
         try {
             File file;
