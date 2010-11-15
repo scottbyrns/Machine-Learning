@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagramm>
+  <classes>
+    <class fqn="com.scottbyrns.ml.neural.DefaultSynapseLayer" x="2161.871316188879" y="1602.5" />
+    <class fqn="com.scottbyrns.ml.neural.DefaultNeuronLayer" x="808.0141733317363" y="1536.5" />
+    <class fqn="com.scottbyrns.ml.neural.FeedForwardNeuralNetworkTest" x="1904.6762379753236" y="2613.0" />
+    <class fqn="com.scottbyrns.ml.neural.DefaultNeuron" x="648.9166666666665" y="984.0" />
+    <class fqn="com.scottbyrns.ml.neural.NeuronLayer" x="1696.6629828555456" y="1072.5" />
+    <class fqn="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" x="1804.1762379753236" y="2100.0" />
+    <class fqn="com.scottbyrns.ml.neural.Synapse" x="1869.5353941476212" y="0.0" />
+    <class fqn="com.scottbyrns.ml.neural.SynapseLayerTest" x="2568.0861452011077" y="2211.0" />
+    <class fqn="com.scottbyrns.ml.neural.NeuronTest" x="116.42929996301268" y="2057.0" />
+    <class fqn="com.scottbyrns.ml.neural.NeuronLayerTest" x="452.7595713086571" y="2145.0" />
+    <class fqn="com.scottbyrns.ml.neural.SynapseTest" x="1039.2417141658" y="2156.0" />
+    <class fqn="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" x="2461.871316188879" y="1504.0" />
+    <class fqn="com.scottbyrns.ml.neural.NeuronType" x="774.1355544040315" y="55.5" />
+    <class fqn="com.scottbyrns.ml.neural.Neuron" x="1192.322968606819" y="497.0" />
+    <class fqn="com.scottbyrns.ml.neural.SynapseLayer" x="2381.7853941476214" y="1127.5" />
+    <class fqn="com.scottbyrns.ml.neural.DefaultSynapse" x="1290.996316188879" y="1580.5" />
+  </classes>
+  <packages>
+    <package fqn="com.scottbyrns.ml.neural.Learning" x="2871.9303371202996" y="2690.0" />
+    <package fqn="com.scottbyrns.ml.neural.Activation" x="996.7426972611744" y="55.5" />
+  </packages>
+  <edges>
+    <edge source="com.scottbyrns.ml.neural.DefaultSynapse" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="0.0" y="-80.0" />
+      <point x="1455.996316188879" y="1464.0" />
+      <point x="1433.2248401183174" y="1464.0" />
+      <point x="1433.2248401183174" y="964.0" />
+      <point x="1428.5015400353905" y="964.0" />
+      <point x="41.67857142857156" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayer" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="-129.66666666666663" y="-101.5" />
+      <point x="1761.496316188879" y="954.0" />
+      <point x="1484.072968606819" y="954.0" />
+      <point x="97.25" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-111.14285714285711" y="-124.0" />
+      <point x="891.3713161888792" y="1414.0" />
+      <point x="1048.4166666666665" y="1414.0" />
+      <point x="1048.4166666666665" y="337.0" />
+      <point x="845.6355544040315" y="337.0" />
+      <point x="6.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.DefaultSynapse" relationship="CREATE">
+      <point x="-193.46153846153845" y="-190.0" />
+      <point x="1862.214699513785" y="1907.0" />
+      <point x="1521.996316188879" y="1907.0" />
+      <point x="66.0" y="80.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.Learning" relationship="CREATE">
+      <point x="65.75" y="13.0" />
+      <point x="3069.1803371202996" y="2746.0" />
+      <point x="2841.9303371202996" y="2746.0" />
+      <point x="2841.9303371202996" y="2696.5" />
+      <point x="-131.5" y="-6.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.DefaultNeuron" relationship="CREATE">
+      <point x="77.5" y="-233.0" />
+      <point x="348.9292999630127" y="1987.0" />
+      <point x="436.1689352364981" y="1987.0" />
+      <point x="436.1689352364981" y="1434.0" />
+      <point x="697.5416666666665" y="1434.0" />
+      <point x="-145.875" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseTest" target="com.scottbyrns.ml.neural.DefaultNeuron" relationship="CREATE">
+      <point x="-61.0" y="-134.0" />
+      <point x="1100.2417141658" y="1927.0" />
+      <point x="760.8229686068188" y="1927.0" />
+      <point x="760.8229686068188" y="1434.0" />
+      <point x="794.7916666666665" y="1434.0" />
+      <point x="-48.625" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseTest" target="com.scottbyrns.ml.neural.DefaultSynapse" relationship="CREATE">
+      <point x="61.0" y="-134.0" />
+      <point x="1222.2417141658" y="2017.0" />
+      <point x="1455.996316188879" y="2017.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.NeuronLayer" relationship="TO_ONE">
+      <point x="155.57142857142844" y="-145.0" />
+      <point x="789.8309998800855" y="2037.0" />
+      <point x="1669.8296495222125" y="2037.0" />
+      <point x="1669.8296495222125" y="1484.0" />
+      <point x="1793.9129828555456" y="1484.0" />
+      <point x="-97.25" y="101.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="-154.76923076923072" y="-190.0" />
+      <point x="1900.9070072060929" y="1897.0" />
+      <point x="1653.496316188879" y="1897.0" />
+      <point x="1653.496316188879" y="964.0" />
+      <point x="1456.2872543211047" y="964.0" />
+      <point x="69.46428571428578" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayer" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="0.0" y="-101.5" />
+      <point x="1891.1629828555456" y="964.0" />
+      <point x="1950.496316188879" y="964.0" />
+      <point x="1950.496316188879" y="297.0" />
+      <point x="884.6355544040315" y="297.0" />
+      <point x="45.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="182.39999999999998" y="-156.5" />
+      <point x="2872.2713161888787" y="1484.0" />
+      <point x="2878.8353941476216" y="1484.0" />
+      <point x="2878.8353941476216" y="217.0" />
+      <point x="2013.5353941476212" y="217.0" />
+      <point x="48.0" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.DefaultNeuronLayer" relationship="CREATE">
+      <point x="51.85714285714289" y="-145.0" />
+      <point x="686.1167141658" y="1987.0" />
+      <point x="905.2641733317363" y="1987.0" />
+      <point x="-97.25" y="124.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-116.0769230769231" y="-190.0" />
+      <point x="1939.5993148984005" y="1887.0" />
+      <point x="1686.1629828555456" y="1887.0" />
+      <point x="1686.1629828555456" y="307.0" />
+      <point x="871.6355544040315" y="307.0" />
+      <point x="32.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.SynapseLayer" relationship="TO_MANY">
+      <point x="77.38461538461524" y="-190.0" />
+      <point x="2133.060853359939" y="2037.0" />
+      <point x="2151.371316188879" y="2037.0" />
+      <point x="2151.371316188879" y="1464.0" />
+      <point x="2405.0353941476214" y="1464.0" />
+      <point x="-116.25" y="46.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-155.57142857142844" y="-145.0" />
+      <point x="478.68814273722865" y="1977.0" />
+      <point x="403.1689352364981" y="1977.0" />
+      <point x="403.1689352364981" y="317.0" />
+      <point x="806.6355544040315" y="317.0" />
+      <point x="-32.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.NeuronLayer" relationship="REALIZATION">
+      <point x="166.71428571428578" y="-124.0" />
+      <point x="1169.2284590460222" y="1474.0" />
+      <point x="1729.0796495222123" y="1474.0" />
+      <point x="-162.08333333333331" y="101.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="-77.5" y="-233.0" />
+      <point x="193.92929996301268" y="2027.0" />
+      <point x="125.22926827835408" y="2027.0" />
+      <point x="125.22926827835408" y="347.0" />
+      <point x="1009.0154245339019" y="347.0" />
+      <point x="-122.72727272727252" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="47.0625" y="-79.0" />
+      <point x="2740.6486452011077" y="2017.0" />
+      <point x="3037.1232076722936" y="2017.0" />
+      <point x="3037.1232076722936" y="207.0" />
+      <point x="1229.9245154429923" y="207.0" />
+      <point x="98.18181818181802" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="38.69230769230762" y="-190.0" />
+      <point x="2094.368545667631" y="2037.0" />
+      <point x="2118.1629828555456" y="2037.0" />
+      <point x="2118.1629828555456" y="267.0" />
+      <point x="1970.8687274809547" y="267.0" />
+      <point x="5.333333333333485" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuron" target="com.scottbyrns.ml.neural.Synapse" relationship="TO_MANY">
+      <point x="111.14285714285734" y="-190.0" />
+      <point x="954.5595238095239" y="874.0" />
+      <point x="884.5595238095237" y="874.0" />
+      <point x="884.5595238095237" y="427.0" />
+      <point x="1906.8687274809547" y="427.0" />
+      <point x="-58.666666666666515" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="91.19999999999993" y="-156.5" />
+      <point x="2781.071316188879" y="1484.0" />
+      <point x="2829.1173952011077" y="1484.0" />
+      <point x="2829.1173952011077" y="227.0" />
+      <point x="897.6355544040315" y="227.0" />
+      <point x="58.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" relationship="REALIZATION">
+      <point x="232.1538461538462" y="-190.0" />
+      <point x="2287.83008412917" y="1967.0" />
+      <point x="2598.671316188879" y="1967.0" />
+      <point x="-91.20000000000002" y="156.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="58.44444444444434" y="-13.0" />
+      <point x="3061.874781564744" y="2573.0" />
+      <point x="3149.7872856310355" y="2573.0" />
+      <point x="3149.7872856310355" y="177.0" />
+      <point x="1254.4699699884472" y="177.0" />
+      <point x="122.72727272727298" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.NeuronLayer" relationship="DEPENDENCY">
+      <point x="-182.39999999999992" y="-156.5" />
+      <point x="2507.471316188879" y="1434.0" />
+      <point x="1988.4129828555456" y="1434.0" />
+      <point x="97.25" y="101.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="-25.833333333333485" y="-233.0" />
+      <point x="245.5959666296792" y="2037.0" />
+      <point x="272.2595713086571" y="2037.0" />
+      <point x="272.2595713086571" y="397.0" />
+      <point x="1874.8687274809547" y="397.0" />
+      <point x="-90.66666666666652" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultSynapseLayer" target="com.scottbyrns.ml.neural.SynapseLayer" relationship="REALIZATION">
+      <point x="93.0" y="-58.0" />
+      <point x="2394.371316188879" y="1474.0" />
+      <point x="2451.5353941476214" y="1474.0" />
+      <point x="-69.75" y="46.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" relationship="DEPENDENCY">
+      <point x="-167.66666666666666" y="190.0" />
+      <point x="1888.0095713086569" y="2500.0" />
+      <point x="1784.1762379753236" y="2500.0" />
+      <point x="1784.1762379753236" y="2290.0" />
+      <point x="-251.5" y="-0.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="0.0" y="-145.0" />
+      <point x="634.2595713086571" y="1947.0" />
+      <point x="493.9292999630127" y="1947.0" />
+      <point x="493.9292999630127" y="1444.0" />
+      <point x="1153.7426972611743" y="1444.0" />
+      <point x="1153.7426972611743" y="914.0" />
+      <point x="1261.7872543211047" y="914.0" />
+      <point x="-125.03571428571422" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="-91.19999999999993" y="-156.5" />
+      <point x="2598.6713161888792" y="1424.0" />
+      <point x="2096.1629828555456" y="1424.0" />
+      <point x="2096.1629828555456" y="944.0" />
+      <point x="1511.8586828925331" y="944.0" />
+      <point x="125.03571428571422" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.Neuron" relationship="TO_ONE">
+      <point x="15.6875" y="-79.0" />
+      <point x="2709.2736452011077" y="2007.0" />
+      <point x="3026.1232076722936" y="2007.0" />
+      <point x="3026.1232076722936" y="934.0" />
+      <point x="1539.6443971782473" y="934.0" />
+      <point x="152.82142857142844" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuron" target="com.scottbyrns.ml.neural.Activation" relationship="DEPENDENCY">
+      <point x="0.0" y="-190.0" />
+      <point x="843.4166666666665" y="874.0" />
+      <point x="792.2069829754602" y="874.0" />
+      <point x="792.2069829754602" y="387.0" />
+      <point x="1107.1972427157198" y="387.0" />
+      <point x="-24.545454545454504" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="0.0" y="-190.0" />
+      <point x="2055.6762379753236" y="2027.0" />
+      <point x="2107.1629828555456" y="2027.0" />
+      <point x="2107.1629828555456" y="277.0" />
+      <point x="1205.3790608975378" y="277.0" />
+      <point x="73.63636363636351" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetworkTest" target="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" relationship="TO_ONE">
+      <point x="100.66666666666697" y="-90.0" />
+      <point x="2156.3429046419906" y="2593.0" />
+      <point x="2533.7423952011077" y="2593.0" />
+      <point x="2533.7423952011077" y="1977.0" />
+      <point x="2689.871316188879" y="1977.0" />
+      <point x="0.0" y="156.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetworkTest" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-100.66666666666697" y="-90.0" />
+      <point x="1955.0095713086566" y="2593.0" />
+      <point x="0.0" y="2593.0" />
+      <point x="0.0" y="297.0" />
+      <point x="780.6355544040315" y="297.0" />
+      <point x="-58.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.DefaultSynapse" relationship="CREATE">
+      <point x="-109.8125" y="-79.0" />
+      <point x="2583.7736452011077" y="1857.0" />
+      <point x="1587.996316188879" y="1857.0" />
+      <point x="132.0" y="80.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="116.88888888888891" y="-13.0" />
+      <point x="3120.3192260091887" y="2593.0" />
+      <point x="3193.22132025517" y="2593.0" />
+      <point x="3193.22132025517" y="157.0" />
+      <point x="2056.2020608142875" y="157.0" />
+      <point x="90.66666666666652" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.DefaultNeuron" relationship="CREATE">
+      <point x="-166.71428571428578" y="-124.0" />
+      <point x="835.7998876174505" y="1404.0" />
+      <point x="892.0416666666665" y="1404.0" />
+      <point x="48.625" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayer" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="0.0" y="-46.5" />
+      <point x="2521.2853941476214" y="237.0" />
+      <point x="2002.8687274809547" y="237.0" />
+      <point x="37.333333333333485" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.DefaultSynapseLayer" relationship="CREATE">
+      <point x="-47.0625" y="-79.0" />
+      <point x="2646.5236452011077" y="1837.0" />
+      <point x="2371.121316188879" y="1837.0" />
+      <point x="69.75" y="58.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.Neuron" relationship="TO_ONE">
+      <point x="25.833333333333485" y="-233.0" />
+      <point x="297.26263329634617" y="2037.0" />
+      <point x="283.2595713086571" y="2037.0" />
+      <point x="283.2595713086571" y="1424.0" />
+      <point x="441.6689352364981" y="1424.0" />
+      <point x="441.6689352364981" y="894.0" />
+      <point x="1206.2158257496762" y="894.0" />
+      <point x="-180.60714285714266" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="111.14285714285711" y="-124.0" />
+      <point x="1113.6570304745933" y="1464.0" />
+      <point x="1175.7426972611743" y="1464.0" />
+      <point x="1175.7426972611743" y="934.0" />
+      <point x="1317.3586828925331" y="934.0" />
+      <point x="-69.46428571428578" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-129.16666666666652" y="-233.0" />
+      <point x="142.26263329634617" y="2037.0" />
+      <point x="97.33333333333348" y="2037.0" />
+      <point x="97.33333333333348" y="307.0" />
+      <point x="793.6355544040315" y="307.0" />
+      <point x="-45.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayer" target="com.scottbyrns.ml.neural.Activation" relationship="DEPENDENCY">
+      <point x="129.66666666666663" y="-101.5" />
+      <point x="2020.8296495222123" y="964.0" />
+      <point x="1974.8757285344411" y="964.0" />
+      <point x="1974.8757285344411" y="287.0" />
+      <point x="1180.8336063520833" y="287.0" />
+      <point x="49.09090909090901" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronTest" target="com.scottbyrns.ml.neural.DefaultSynapse" relationship="CREATE">
+      <point x="129.16666666666652" y="-233.0" />
+      <point x="400.5959666296792" y="1997.0" />
+      <point x="1323.996316188879" y="1997.0" />
+      <point x="-132.0" y="80.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.SynapseLayer" relationship="DEPENDENCY">
+      <point x="0.0" y="-156.5" />
+      <point x="2689.871316188879" y="1414.0" />
+      <point x="2544.5353941476214" y="1414.0" />
+      <point x="23.25" y="46.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.DefaultNeuron" relationship="CREATE">
+      <point x="-78.4375" y="-79.0" />
+      <point x="2615.1486452011077" y="1847.0" />
+      <point x="1631.496316188879" y="1847.0" />
+      <point x="1631.496316188879" y="1404.0" />
+      <point x="989.2916666666665" y="1404.0" />
+      <point x="145.875" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.SynapseLayer" relationship="DEPENDENCY">
+      <point x="0.0" y="-13.0" />
+      <point x="3003.4303371202996" y="2553.0" />
+      <point x="3127.7872856310355" y="2553.0" />
+      <point x="3127.7872856310355" y="1384.0" />
+      <point x="2637.5353941476214" y="1384.0" />
+      <point x="116.25" y="46.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="29.22222222222217" y="-13.0" />
+      <point x="3032.652559342522" y="2563.0" />
+      <point x="3138.7872856310355" y="2563.0" />
+      <point x="3138.7872856310355" y="924.0" />
+      <point x="1567.430111463962" y="924.0" />
+      <point x="180.60714285714312" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseTest" target="com.scottbyrns.ml.neural.Neuron" relationship="TO_ONE">
+      <point x="20.333333333333485" y="-134.0" />
+      <point x="1181.5750474991335" y="1987.0" />
+      <point x="1280.496316188879" y="1987.0" />
+      <point x="1280.496316188879" y="954.0" />
+      <point x="1372.930111463962" y="954.0" />
+      <point x="-13.892857142856883" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultSynapse" target="com.scottbyrns.ml.neural.Synapse" relationship="REALIZATION">
+      <point x="110.0" y="-80.0" />
+      <point x="1565.996316188879" y="1454.0" />
+      <point x="1664.496316188879" y="1454.0" />
+      <point x="1664.496316188879" y="467.0" />
+      <point x="1949.5353941476212" y="467.0" />
+      <point x="-16.0" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseTest" target="com.scottbyrns.ml.neural.Synapse" relationship="TO_ONE">
+      <point x="101.66666666666652" y="-134.0" />
+      <point x="1262.9083808324665" y="2027.0" />
+      <point x="1642.496316188879" y="2027.0" />
+      <point x="1642.496316188879" y="1464.0" />
+      <point x="1675.1629828555456" y="1464.0" />
+      <point x="1675.1629828555456" y="477.0" />
+      <point x="1960.2020608142877" y="477.0" />
+      <point x="-5.333333333333485" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="109.8125" y="-79.0" />
+      <point x="2803.3986452011077" y="2037.0" />
+      <point x="3059.1232076722936" y="2037.0" />
+      <point x="3059.1232076722936" y="187.0" />
+      <point x="2034.8687274809547" y="187.0" />
+      <point x="69.33333333333348" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuron" target="com.scottbyrns.ml.neural.Neuron" relationship="REALIZATION">
+      <point x="166.71428571428578" y="-190.0" />
+      <point x="1010.1309523809523" y="904.0" />
+      <point x="1234.0015400353905" y="904.0" />
+      <point x="-152.82142857142844" y="178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.NeuronLayer" relationship="DEPENDENCY">
+      <point x="-29.22222222222217" y="-13.0" />
+      <point x="2974.208114898078" y="2543.0" />
+      <point x="3116.7872856310355" y="2543.0" />
+      <point x="3116.7872856310355" y="1394.0" />
+      <point x="2053.246316188879" y="1394.0" />
+      <point x="162.08333333333326" y="101.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.Activation" relationship="DEPENDENCY">
+      <point x="-55.57142857142867" y="-124.0" />
+      <point x="946.9427447603076" y="1424.0" />
+      <point x="1131.7426972611743" y="1424.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.DefaultSynapse" relationship="CREATE">
+      <point x="103.71428571428578" y="-145.0" />
+      <point x="737.9738570229429" y="2007.0" />
+      <point x="1389.996316188879" y="2007.0" />
+      <point x="-66.0" y="80.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseLayerTest" target="com.scottbyrns.ml.neural.SynapseLayer" relationship="TO_ONE">
+      <point x="-15.6875" y="-79.0" />
+      <point x="2677.8986452011077" y="1997.0" />
+      <point x="2928.371316188879" y="1997.0" />
+      <point x="2928.371316188879" y="1404.0" />
+      <point x="2591.0353941476214" y="1404.0" />
+      <point x="69.75" y="46.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.SynapseTest" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="-101.66666666666652" y="-134.0" />
+      <point x="1059.5750474991335" y="1937.0" />
+      <point x="638.4166666666665" y="1937.0" />
+      <point x="638.4166666666665" y="367.0" />
+      <point x="1058.1063336248108" y="367.0" />
+      <point x="-73.63636363636351" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuronLayer" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="0.0" y="-124.0" />
+      <point x="1002.5141733317363" y="1434.0" />
+      <point x="1142.7426972611743" y="1434.0" />
+      <point x="1142.7426972611743" y="437.0" />
+      <point x="1917.5353941476212" y="437.0" />
+      <point x="-48.0" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.DefaultSynapseLayer" relationship="CREATE">
+      <point x="116.0769230769231" y="-190.0" />
+      <point x="2171.7531610522465" y="1937.0" />
+      <point x="2231.621316188879" y="1937.0" />
+      <point x="-69.75" y="58.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="-51.85714285714289" y="-145.0" />
+      <point x="582.4024284515142" y="1957.0" />
+      <point x="425.1689352364981" y="1957.0" />
+      <point x="425.1689352364981" y="407.0" />
+      <point x="1885.5353941476212" y="407.0" />
+      <point x="-80.0" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" relationship="CREATE">
+      <point x="-116.88888888888891" y="-13.0" />
+      <point x="2886.541448231411" y="2583.0" />
+      <point x="2223.34290464199" y="2583.0" />
+      <point x="167.66666666666652" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.DefaultNeuronLayer" relationship="CREATE">
+      <point x="-232.1538461538462" y="-190.0" />
+      <point x="1823.5223918214774" y="1917.0" />
+      <point x="1099.7641733317364" y="1917.0" />
+      <point x="97.25" y="124.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Neuron" target="com.scottbyrns.ml.neural.NeuronType" relationship="DEPENDENCY">
+      <point x="-145.875" y="-178.5" />
+      <point x="1240.947968606819" y="327.0" />
+      <point x="858.6355544040315" y="327.0" />
+      <point x="19.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Synapse" target="com.scottbyrns.ml.neural.Neuron" relationship="DEPENDENCY">
+      <point x="-26.666666666666515" y="68.5" />
+      <point x="1938.8687274809547" y="457.0" />
+      <point x="1532.697968606819" y="457.0" />
+      <point x="145.875" y="-178.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Neuron" target="com.scottbyrns.ml.neural.Synapse" relationship="DEPENDENCY">
+      <point x="48.625" y="-178.5" />
+      <point x="1435.447968606819" y="447.0" />
+      <point x="1928.2020608142877" y="447.0" />
+      <point x="-37.333333333333485" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Learning" target="com.scottbyrns.ml.neural.FeedForwardNeuralNetwork" relationship="TO_ONE">
+      <point x="-87.66666666666674" y="-13.0" />
+      <point x="2915.763670453633" y="2573.0" />
+      <point x="2557.5861452011077" y="2573.0" />
+      <point x="2557.5861452011077" y="1987.0" />
+      <point x="2781.071316188879" y="1987.0" />
+      <point x="91.19999999999993" y="156.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.FeedForwardNeuralNetworkTest" target="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" relationship="CREATE">
+      <point x="0.0" y="-90.0" />
+      <point x="0.0" y="190.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultNeuron" target="com.scottbyrns.ml.neural.NeuronType" relationship="TO_ONE">
+      <point x="-111.14285714285734" y="-190.0" />
+      <point x="732.2738095238092" y="884.0" />
+      <point x="763.4070304745935" y="884.0" />
+      <point x="763.4070304745935" y="337.0" />
+      <point x="832.6355544040315" y="337.0" />
+      <point x="-6.5" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.NeuronLayerTest" target="com.scottbyrns.ml.neural.Activation" relationship="CREATE">
+      <point x="-103.71428571428578" y="-145.0" />
+      <point x="530.5452855943713" y="1967.0" />
+      <point x="414.1689352364981" y="1967.0" />
+      <point x="414.1689352364981" y="357.0" />
+      <point x="1033.5608790793563" y="357.0" />
+      <point x="-98.18181818181802" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.Neuron" target="com.scottbyrns.ml.neural.Activation" relationship="DEPENDENCY">
+      <point x="-48.625" y="-178.5" />
+      <point x="1338.197968606819" y="317.0" />
+      <point x="1156.2881518066288" y="317.0" />
+      <point x="24.545454545454504" y="13.0" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultSynapseLayer" target="com.scottbyrns.ml.neural.Synapse" relationship="TO_MANY">
+      <point x="0.0" y="-58.0" />
+      <point x="2301.371316188879" y="1444.0" />
+      <point x="2209.496316188879" y="1444.0" />
+      <point x="2209.496316188879" y="247.0" />
+      <point x="1992.2020608142877" y="247.0" />
+      <point x="26.666666666666515" y="68.5" />
+    </edge>
+    <edge source="com.scottbyrns.ml.neural.DefaultFeedForwardNeuralNetwork" target="com.scottbyrns.ml.neural.NeuronLayer" relationship="TO_MANY">
+      <point x="-38.692307692307736" y="-190.0" />
+      <point x="2016.983930283016" y="1867.0" />
+      <point x="1896.6629828555458" y="1867.0" />
+      <point x="1896.6629828555458" y="1484.0" />
+      <point x="1923.5796495222125" y="1484.0" />
+      <point x="32.41666666666674" y="101.5" />
+    </edge>
+  </edges>
+  <settings isCamel="false" isColorManagerEnabled="true" isFieldsVisible="false" isConstructorsVisible="true" isMethodsVisible="true" isShowDependencies="true" isShowInnerClasses="false" isVcsFilterEnabled="false" defaultVisibility="public" layout="Hierarchic Group" isPropertiesVisible="true" zoom="0.40000000000000013" x="2659.9999999999995" y="1125.4999999999995" />
+  <SelectedNodes />
+</ClassDiagramm>
+
