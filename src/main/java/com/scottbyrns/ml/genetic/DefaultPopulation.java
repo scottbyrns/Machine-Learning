@@ -69,7 +69,7 @@ public class DefaultPopulation implements Population {
 
         setCandidatesSorted(false);
 
-        if (getModel().getPopulationCutoff() <= getFittest().getFitness()) {
+        if (getModel().getFitnessCutoff() <= getFittest().getFitness()) {
             throw new OptimizationCutoffReached("Optimization cutoff reached");
         }
 
