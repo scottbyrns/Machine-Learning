@@ -8,7 +8,7 @@ package com.scottbyrns.ml.genetic;
 public class MockCandidateModel implements PopulationModel {
         private int PopulationSize = 5;
         private int Generations = 500;
-        private double FitnessCutoff = 1.0;
+        private double FitnessCutoff = 0.5;
         private float PopulationCutoff = 0.25f;
         private int GenomeLength = 24;
         private int GenomeCrossLength = 8;
