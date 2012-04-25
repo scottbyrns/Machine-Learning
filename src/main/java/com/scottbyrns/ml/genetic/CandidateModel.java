@@ -8,7 +8,7 @@ package com.scottbyrns.ml.genetic;
 public interface CandidateModel extends GenomeModel {
     /**
      * @return Target fitness cutoff. If the fitness of a candidate is equal to or greater than this value
-     * an OptimizationCutoffReached exception will be thrown.
+     * an OptimizationCutoffException exception will be thrown.
      */
     public double getFitnessCutoff ();
 }

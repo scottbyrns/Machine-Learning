@@ -51,7 +51,7 @@ public class DefaultPopulation implements Population {
 	/**
 	 * Create the next generation of the population.
 	 */
-	public void nextGeneration () throws OptimizationCutoffReached {
+	public void nextGeneration () throws OptimizationCutoffException {
 
 		Random random = new Random();
 
@@ -70,7 +70,7 @@ public class DefaultPopulation implements Population {
         setCandidatesSorted(false);
 
         if (getModel().getFitnessCutoff() <= getFittest().getFitness()) {
-            throw new OptimizationCutoffReached("Optimization cutoff reached");
+            throw new OptimizationCutoffException("Optimization cutoff reached");
         }
 
     }
