@@ -9,7 +9,7 @@ public interface Population {
     /**
 	 * Create the next generation of the population.
 	 */
-    public void nextGeneration () throws OptimizationCutoffReached;
+    public void nextGeneration () throws OptimizationCutoffException;
     /**
      * Sort the candidates by fitness and return the fittest of them.
      * @return The fittest candidate

@@ -32,6 +32,9 @@ public class BackPropagationTest {
         rprop = new BackPropagation(new DefaultFeedForwardNeuralNetwork(3, new int[]{3}, 1, new ActivationFunctionSigmoid()));
     }
 
+    /**
+     * Train an XOR pattern.
+     */
     @Test
     public void trainXOR () {
         patternSet.addPattern(new DefaultPattern("0;0;0", "0"));
