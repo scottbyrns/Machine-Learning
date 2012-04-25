@@ -29,7 +29,7 @@ public class PopulationTest {
             population.nextGeneration();
             assertTrue(true);
         }
-        catch (OptimizationCutoffReached e) {
+        catch (OptimizationCutoffException e) {
             assertTrue(true);
         }
         catch (Exception e) {
@@ -52,7 +52,7 @@ public class PopulationTest {
             try {
                 population.nextGeneration();
             }
-            catch (OptimizationCutoffReached e) {
+            catch (OptimizationCutoffException e) {
                 assertTrue(true);
                 return;
             }
@@ -65,12 +65,13 @@ public class PopulationTest {
 
     @Test
     public void testWillOptimize () {
+        System.out.println("Hold your horses this test is going to take a bit to run.");
         Candidate candidate = population.getFittest();
         while(true) {
             try {
                 population.nextGeneration();
             }
-            catch (OptimizationCutoffReached e) {
+            catch (OptimizationCutoffException e) {
                 assertTrue(true);
                 return;
             }

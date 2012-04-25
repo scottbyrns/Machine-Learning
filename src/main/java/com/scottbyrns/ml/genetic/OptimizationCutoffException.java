@@ -5,9 +5,9 @@ package com.scottbyrns.ml.genetic;
  * Date: Nov 10, 2010
  * Time: 10:50:30 AM
  */
-public class OptimizationCutoffReached extends Exception {
+public class OptimizationCutoffException extends Exception {
 
-        public OptimizationCutoffReached (String message) {
+        public OptimizationCutoffException(String message) {
             super(message);
         }
 

@@ -17,8 +17,8 @@ public class SynapseTest {
 
     private Synapse synapse;
 
-    Neuron testNeuronSource;
-    Neuron testNeuronDestination;
+    private Neuron testNeuronSource;
+    private Neuron testNeuronDestination;
 
     @Before
     public void setup () {

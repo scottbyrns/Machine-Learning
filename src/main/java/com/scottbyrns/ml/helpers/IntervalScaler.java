@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * Created by scott
- * Date: Nov 12, 2010
- * Time: 7:52:33 PM
- */
-/**
  * Stores an interval and allows to make operations on it
  */
 public class IntervalScaler implements Serializable
