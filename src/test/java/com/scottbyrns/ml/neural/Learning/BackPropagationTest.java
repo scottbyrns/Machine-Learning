@@ -71,6 +71,47 @@ public class BackPropagationTest {
 		System.out.println(output);
     }
 
+    /**
+     * Train an XNOR pattern.
+     */
+    @Test
+    public void trainXNOR () {
+
+
+       patternSet.addPattern(new DefaultPattern("0;0;0", "1"));
+       patternSet.addPattern(new DefaultPattern("0;0;1", "0"));
+       patternSet.addPattern(new DefaultPattern("0;1;0", "0"));
+       patternSet.addPattern(new DefaultPattern("0;1;1", "1"));
+       patternSet.addPattern(new DefaultPattern("1;0;0", "0"));
+       patternSet.addPattern(new DefaultPattern("1;0;1", "1"));
+       patternSet.addPattern(new DefaultPattern("1;1;0", "1"));
+       patternSet.addPattern(new DefaultPattern("1;1;1", "0"));
+
+        rprop.setTargetError(0.0001);
+        rprop.setPatternSet(patternSet);
+        rprop.setLearningStrategy(LearningStrategy.Memorize);
+
+        rprop.startTraining();
+        while (rprop.isRunning()) {
+            try {
+                Thread.sleep(100);
+            }
+            catch (Throwable e) {
+
+            }
+        }
+
+        /**
+         * @TODO make testable
+         */
+		// Test the network's accuracy and return the output to a string
+		String output = new StringTester(rprop.getNetwork()).test(patternSet);
+
+
+		// Print the string with the output
+		System.out.println(output);
+    }
+
 //    @Test
     public void testImage () {
         try {
