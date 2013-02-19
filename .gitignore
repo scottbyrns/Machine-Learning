@@ -4,3 +4,8 @@ target/
 doc/
 /doc/
 /doc
+.DS_Store
+
+ml.iml
+
+atlassian-ide-plugin.xml
